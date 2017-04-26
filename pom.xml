@@ -12,11 +12,7 @@
         Featured Transition Systems (FTSs) and Usage Models (Deterministic Time Markov Chain) in order to 
         perform classical testing tasks: test case selection, prioritization, mutation testing, etc. 
     </description>
-    <url>https://github.com/xdevroey/vibes.git</url>
-    <organization>
-        <name>PReCISE, University of Namur</name>
-        <url>http://www.unamur.be/en/precise/</url>
-    </organization>
+    <url>https://github.com/xdevroey/vibes</url>
     <inceptionYear>2014</inceptionYear>
     <licenses>
         <license>
@@ -29,24 +25,12 @@
         <developer>
             <id>xde</id>
             <name>Xavier Devroey</name>
-            <email>xavier.devroey@unamur.be</email>
-            <url>http://directory.unamur.be/staff/xdevroey</url>
-            <organization>PReCISE - UNamur</organization>
-            <organizationUrl>http://www.unamur.be/en/precise/</organizationUrl>
-            <properties>
-                <picUrl>http://directory.unamur.be/photos/xdevroey-small.jpg</picUrl>
-            </properties>
+            <url>https://sites.google.com/site/xdevroey/</url>
         </developer>
         <developer>
             <id>gpe</id>
             <name>Gilles Perrouin</name>
-            <email>gilles.perrouin@unamur.be</email>
             <url>http://directory.unamur.be/staff/gperrouin</url>
-            <organization>PReCISE - UNamur</organization>
-            <organizationUrl>http://www.unamur.be/en/precise/</organizationUrl>
-            <properties>
-                <picUrl>http://directory.unamur.be/photos/gperroui-small.jpg</picUrl>
-            </properties>
         </developer>
     </developers>
 
