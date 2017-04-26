@@ -1,0 +1,9 @@
+target/
+**/target/
+.DS_Store/
+.project/
+.settings/
+.classpath
+**/.classpath
+**/nbproject/
+**/**/nbproject/

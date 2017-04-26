@@ -1,0 +1,27 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>be.unamur.info</groupId>
+        <artifactId>vibes</artifactId>
+        <version>1.1.6-SNAPSHOT</version>
+    </parent>
+    <artifactId>vibes-toolbox</artifactId>
+    <packaging>pom</packaging>
+
+    <name>VIBeS - Toolbox</name>
+    <description>
+        This module groups all the executables created using the VIBeS framework.
+    </description>
+    <modules>
+        <module>toolbox-mutation-equivalence</module>
+        <module>toolbox-mutant-generation</module>
+        <module>toolbox-transformation</module>
+        <module>toolbox-products-analyze</module>
+        <module>toolbox-testcase-generation</module>
+        <module>toolbox-fmm-execution</module>
+        <module>toolbox-model-statistics</module>
+        <module>toolbox-mutant-sampling</module>
+        <module>toolbox-wordpress-ts2fts</module>
+        <module>toolbox-determinism</module>
+    </modules>
+</project>

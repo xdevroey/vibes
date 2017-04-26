@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema targetNamespace="http://www.unamur.be/xml/fts/"
+        xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fts="http://www.unamur.be/xml/fts/"
+        elementFormDefault="qualified" >
+
+    <element name="fts">
+        <complexType>
+            <sequence>
+                <element name="start" type="IDREF" />
+                <element name="states" type="fts:stateSequence" />
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="stateSequence">
+        <sequence>
+            <element name="state" type="fts:state" minOccurs="1" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+
+    <complexType name="state">
+        <sequence>
+            <element name="transition" type="fts:transition" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+    </complexType>
+
+    <complexType name="transition">
+        <attribute name="action" type="string" use="optional"/>
+        <attribute name="fexpression" type="string" use="optional" />
+        <attribute name="target" type="IDREF" use="required"/>
+    </complexType>
+
+</schema>
