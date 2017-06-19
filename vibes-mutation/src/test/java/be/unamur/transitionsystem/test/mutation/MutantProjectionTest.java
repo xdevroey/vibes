@@ -31,13 +31,13 @@ import org.slf4j.LoggerFactory;
  */
 public class MutantProjectionTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(MutantProjectionTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MutantProjectionTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;

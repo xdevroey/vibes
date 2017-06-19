@@ -46,13 +46,13 @@ import be.unamur.transitionsystem.transformation.xml.XmlReader;
 
 public class WrongInitialStateTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(WrongInitialStateTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(WrongInitialStateTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -68,7 +68,7 @@ public class WrongInitialStateTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final State state = system.getState("state2");
         WrongInitialState op = new WrongInitialState(system, new StateSelectionStrategy() {
             @Override
@@ -79,7 +79,7 @@ public class WrongInitialStateTest {
         op.apply();
         assertEquals("Wrong initial state!", state, op.getNewInitialState());
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         assertEquals("Wrong initial state!", state, mutant.getInitialState());
     }
 
@@ -92,7 +92,7 @@ public class WrongInitialStateTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final State state = system.getState("state2");
         WrongInitialState op = new WrongInitialState(system, new StateSelectionStrategy() {
             @Override
@@ -102,7 +102,7 @@ public class WrongInitialStateTest {
         });
         op.apply();
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         assertNotNull(mutant);
         
     }

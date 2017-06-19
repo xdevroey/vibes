@@ -54,13 +54,13 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class ActionMissingTest {
 
-    private Logger logger = LoggerFactory.getLogger(ActionMissingTest.class);
+    private Logger LOG = LoggerFactory.getLogger(ActionMissingTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -76,10 +76,10 @@ public class ActionMissingTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition selectedTransition = system.getInitialState()
                 .outgoingTransitions().next();
-        logger.debug("Selected transition = {}", selectedTransition);
+        LOG.debug("Selected transition = {}", selectedTransition);
         ActionMissing op = new ActionMissing(system, new TransitionSelectionStrategy() {
             @Override
             public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -89,7 +89,7 @@ public class ActionMissingTest {
         op.apply();
         assertEquals("Wrong transition!", selectedTransition, op.getTransition());
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         Transition modified = new Transition(mutant.getState(selectedTransition.getFrom()
                 .getName()), mutant.getState(selectedTransition.getTo().getName()),
                 mutant.getAction(Action.NO_ACTION_NAME));
@@ -106,9 +106,9 @@ public class ActionMissingTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition selectedTransition = system.getState("state2").outgoingTransitions().next();
-        logger.debug("Selected transition = {}", selectedTransition);
+        LOG.debug("Selected transition = {}", selectedTransition);
         ActionMissing op = new ActionMissing(system, new TransitionSelectionStrategy() {
             @Override
             public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -117,7 +117,7 @@ public class ActionMissingTest {
         });
         op.apply();
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("FTS Mutant = {}", mutant);
+        LOG.debug("FTS Mutant = {}", mutant);
         Set<FeaturedTransition> trsToCheck = Sets.newHashSet();
         for (Iterator iterator = mutant.getState("state2").outgoingTransitions(); iterator.hasNext();) {
             FeaturedTransition next = (FeaturedTransition) iterator.next();

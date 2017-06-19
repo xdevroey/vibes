@@ -53,13 +53,13 @@ import java.util.Set;
 
 public class ActionExchangeTest {
 
-    private Logger logger = LoggerFactory.getLogger(ActionExchangeTest.class);
+    private Logger LOG = LoggerFactory.getLogger(ActionExchangeTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -75,12 +75,12 @@ public class ActionExchangeTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.debug("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition selectedTransition = system.getInitialState()
                 .outgoingTransitions().next();
-        logger.debug("Selected transition = {}", selectedTransition);
+        LOG.debug("Selected transition = {}", selectedTransition);
         final Action selectedAction = system.getAction("return");
-        logger.debug("Selected Action = {}", selectedAction);
+        LOG.debug("Selected Action = {}", selectedAction);
         ActionExchange op = new ActionExchange(system, new TransitionSelectionStrategy() {
             @Override
             public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -96,7 +96,7 @@ public class ActionExchangeTest {
         assertThat(selectedAction, equalTo(op.getNewAction()));
         assertThat(selectedTransition, equalTo(op.getTransition()));
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         Transition modified = new Transition(mutant.getState(selectedTransition.getFrom()
                 .getName()), mutant.getState(selectedTransition.getTo().getName()),
                 mutant.getAction(selectedAction.getName()));
@@ -113,12 +113,12 @@ public class ActionExchangeTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.debug("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition selectedTransition = system.getState("state2")
                 .outgoingTransitions().next();
-        logger.debug("Selected transition = {}", selectedTransition);
+        LOG.debug("Selected transition = {}", selectedTransition);
         final Action selectedAction = system.getAction("return");
-        logger.debug("Selected Action = {}", selectedAction);
+        LOG.debug("Selected Action = {}", selectedAction);
         ActionExchange op = new ActionExchange(system, new TransitionSelectionStrategy() {
             @Override
             public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -132,7 +132,7 @@ public class ActionExchangeTest {
         });
         op.apply();
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         Set<FeaturedTransition> trsToCheck = Sets.newHashSet();
         for (Iterator iterator = mutant.getState("state2").outgoingTransitions(); iterator.hasNext();) {
             FeaturedTransition next = (FeaturedTransition) iterator.next();

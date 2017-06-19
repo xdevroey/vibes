@@ -54,13 +54,13 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class TransitionDestinationExchangeTest {
 
-    private Logger logger = LoggerFactory.getLogger(TransitionDestinationExchangeTest.class);
+    private Logger LOG = LoggerFactory.getLogger(TransitionDestinationExchangeTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -76,7 +76,7 @@ public class TransitionDestinationExchangeTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition tr = system.getState("state2").outgoingTransitions().next();
         final State to = system.getState("state6");
         TransitionDestinationExchange op = new TransitionDestinationExchange(system, new TransitionSelectionStrategy() {
@@ -94,7 +94,7 @@ public class TransitionDestinationExchangeTest {
         assertEquals("Wrong From state!", tr, op.getTransition());
         assertEquals("Wrong To state!", to, op.getNewDest());
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         assertEquals(mutant.getState("state6"), mutant.getState("state2").outgoingTransitions().next().getTo());
     }
 
@@ -107,7 +107,7 @@ public class TransitionDestinationExchangeTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition tr = system.getState("state2").outgoingTransitions().next();
         final State to = system.getState("state6");
         TransitionDestinationExchange op = new TransitionDestinationExchange(system, new TransitionSelectionStrategy() {
@@ -123,7 +123,7 @@ public class TransitionDestinationExchangeTest {
         });
         op.apply();
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("FTS Mutant = {}", mutant);
+        LOG.debug("FTS Mutant = {}", mutant);
         State s = mutant.getState("state2");
         Set<FeaturedTransition> trsToCheck = Sets.newHashSet();
         for (Iterator iterator = s.outgoingTransitions(); iterator.hasNext();) {

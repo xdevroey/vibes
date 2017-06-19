@@ -45,13 +45,13 @@ import org.slf4j.LoggerFactory;
  */
 public class MutantDifferenceTest {
 
-    private Logger logger = LoggerFactory.getLogger(MutantDifferenceTest.class);
+    private Logger LOG = LoggerFactory.getLogger(MutantDifferenceTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.debug(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
 
@@ -68,8 +68,8 @@ public class MutantDifferenceTest {
     @Test
     public void getLtsDiffStatesTestSame() throws Exception {
 
-        LabelledTransitionSystem original = getLts(new File(this.getClass().getClassLoader().getResource("ElsaRR.ts").getFile()));
-        LabelledTransitionSystem mutant = getLts(new File(this.getClass().getClassLoader().getResource("ElsaRR.ts").getFile()));
+        LabelledTransitionSystem original = getLts(new File(this.getClass().getClassLoader().getResource("elsaRR.ts").getFile()));
+        LabelledTransitionSystem mutant = getLts(new File(this.getClass().getClassLoader().getResource("elsaRR.ts").getFile()));
         Assert.assertNotNull(mutant);
         Assert.assertNotNull(original);
 
@@ -120,12 +120,12 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.debug("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final Transition selectedTransition = system.getState("state2")
                     .outgoingTransitions().next();
-            logger.debug("Selected transition = {}", selectedTransition);
+            LOG.debug("Selected transition = {}", selectedTransition);
             final Action selectedAction = system.getAction("return");
-            logger.debug("Selected Action = {}", selectedAction);
+            LOG.debug("Selected Action = {}", selectedAction);
             ActionExchange op = new ActionExchange(system, new TransitionSelectionStrategy() {
                 @Override
                 public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -163,7 +163,7 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final Transition tr = system.getState("state2").outgoingTransitions().next();
             final State to = system.getState("state6");
             TransitionDestinationExchange op = new TransitionDestinationExchange(system, new TransitionSelectionStrategy() {
@@ -204,9 +204,9 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final State selectedState = system.getState("state2");
-            logger.info("Selected state is {}", selectedState);
+            LOG.debug("Selected state is {}", selectedState);
             StateMissing op = new StateMissing(system, new StateSelectionStrategy() {
                 @Override
                 public State selectState(MutationOperator op, TransitionSystem ts) {
@@ -239,7 +239,7 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final Transition tr = system.getState("state2").outgoingTransitions().next();
             TransitionMissing op = new TransitionMissing(system, new TransitionSelectionStrategy() {
                 @Override
@@ -274,10 +274,10 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final Transition selectedTransition = system.getInitialState()
                     .outgoingTransitions().next();
-            logger.debug("Selected transition = {}", selectedTransition);
+            LOG.debug("Selected transition = {}", selectedTransition);
             ActionMissing op = new ActionMissing(system, new TransitionSelectionStrategy() {
                 @Override
                 public Transition selectTransition(MutationOperator op, TransitionSystem ts) {
@@ -312,7 +312,7 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final State from = system.getState("state2");
             final State to = system.getState("state6");
             final Action action = system.addAction("serveSoda");
@@ -361,7 +361,7 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final State state = system.getState("state2");
             WrongInitialState op = new WrongInitialState(system, new StateSelectionStrategy() {
                 @Override
@@ -395,7 +395,7 @@ public class MutantDifferenceTest {
             reader.readDocument();
             LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
             assertNotNull(system);
-            logger.info("Transition System {}", system);
+            LOG.debug("Transition System {}", system);
             final State from = system.getState("state2");
             final State to = system.getState("state6");
             final Action action = system.addAction("serveSoda");
@@ -431,10 +431,10 @@ public class MutantDifferenceTest {
                 TestCase tc = gen.generateTestCase(mutant);
                 ExecutionTree tree = runner.run(system, tc);
                 if (!tree.hasPath()) {
-                    logger.debug("found non-executing test case" + tc.toString());
+                    LOG.debug("found non-executing test case" + tc.toString());
                     isok = true;
                 } else {
-                    logger.debug("found executing test case" + tc.toString());
+                    LOG.debug("found executing test case" + tc.toString());
                 }
             }
              Assert.assertTrue(isok);
@@ -452,7 +452,7 @@ public class MutantDifferenceTest {
         LabelledTransitionSystem mutant = getLts(new File(this.getClass().getClassLoader().getResource("BadTDE/TDE_543.ts").getFile())); 
         
            ArrayList<State> res = MutantDifference.getLTSDiffStates(original, mutant);
-           logger.debug(res.toString());
+           LOG.debug(res.toString());
            
             Assert.assertNotNull(res);
         

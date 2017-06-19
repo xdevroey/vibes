@@ -39,13 +39,13 @@ import be.unamur.transitionsystem.LabelledTransitionSystem;
 
 public class MutationConfigurationTest {
 
-    private Logger logger = LoggerFactory.getLogger(MutationConfigurationTest.class);
+    private Logger LOG = LoggerFactory.getLogger(MutationConfigurationTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
