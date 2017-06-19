@@ -35,11 +35,6 @@ import org.junit.runner.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import be.unamur.transitionsystem.Action;
-import be.unamur.transitionsystem.State;
-import be.unamur.transitionsystem.Transition;
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-
 public class TransitionSystemTest extends LabelledTransitionSystem {
 
     private static final Logger logger = LoggerFactory.getLogger(TransitionSystemTest.class);

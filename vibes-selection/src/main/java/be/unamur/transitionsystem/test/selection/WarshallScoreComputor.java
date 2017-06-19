@@ -89,7 +89,7 @@ public class WarshallScoreComputor implements ScoreComputor {
      * Compute the accessibility Matrix using the Warshall algorithm.
      */
     public void warshall() {
-        LOG.info("Computing accessibility matrix using Warshall algorithm");
+        LOG.debug("Computing accessibility matrix using Warshall algorithm");
         boolean a_ik, a_kj, a_ij;
         Set<State> states = Sets.newHashSet(this.matrix.keySet());
         for (State k : states) {
@@ -103,7 +103,7 @@ public class WarshallScoreComputor implements ScoreComputor {
                 }
             }
         }
-        LOG.info("Done computing accessibility matrix");
+        LOG.debug("Done computing accessibility matrix");
         level++;
     }
 
