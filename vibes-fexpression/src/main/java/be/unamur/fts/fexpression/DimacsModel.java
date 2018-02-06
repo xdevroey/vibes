@@ -36,6 +36,7 @@ public class DimacsModel {
     }
 
     public static DimacsModel createFromDimacsFile(File dimacs) throws IOException {
+        checkArgument(dimacs.isFile(), "File %s not found!", dimacs);
         return new DimacsModel(dimacs);
     }
 

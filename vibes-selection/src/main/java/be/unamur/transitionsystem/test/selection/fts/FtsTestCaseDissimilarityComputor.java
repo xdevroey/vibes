@@ -101,8 +101,7 @@ public class FtsTestCaseDissimilarityComputor extends TestCaseDissimilarityCompu
             double unionCount = solver.getNumberOfSolutions();
             solver.removeConstraint(id);
 
-            checkState(unionCount > 0, "Product Sets may not be empty!");
-            checkState(unionCount >= intersectionCount, "Union has to be higher or equal to intersection !");
+            checkState(unionCount >= intersectionCount, "Union (%s) has to be higher or equal to intersection (%s) !", unionCount, intersectionCount);
 
             return 1 - (intersectionCount / unionCount);
         } catch (SolverInitializationException e) {
