@@ -38,8 +38,6 @@ import org.slf4j.LoggerFactory;
 import be.unamur.transitionsystem.Action;
 import be.unamur.transitionsystem.State;
 import be.unamur.transitionsystem.Transition;
-import be.unamur.transitionsystem.usagemodel.UsageModelTransition;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
 
 public class UsageModelTest extends UsageModel {
 

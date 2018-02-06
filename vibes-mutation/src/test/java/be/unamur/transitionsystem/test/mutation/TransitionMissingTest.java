@@ -50,13 +50,13 @@ import static org.hamcrest.Matchers.*;
 
 public class TransitionMissingTest {
 
-    private Logger logger = LoggerFactory.getLogger(TransitionMissingTest.class);
+    private Logger LOG = LoggerFactory.getLogger(TransitionMissingTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -72,7 +72,7 @@ public class TransitionMissingTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition tr = system.getState("state2").outgoingTransitions().next();
         TransitionMissing op = new TransitionMissing(system, new TransitionSelectionStrategy() {
             @Override
@@ -83,7 +83,7 @@ public class TransitionMissingTest {
         op.apply();
         assertEquals("Wrong transition!", tr, op.getTransition());
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         assertEquals("Wrong number of transitions!", 0, mutant.getState("state2").outgoingSize());
     }
 
@@ -96,7 +96,7 @@ public class TransitionMissingTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final Transition tr = system.getState("state2").outgoingTransitions().next();
         TransitionMissing op = new TransitionMissing(system, new TransitionSelectionStrategy() {
             @Override
@@ -107,7 +107,7 @@ public class TransitionMissingTest {
         op.apply();
         assertEquals("Wrong transition!", tr, op.getTransition());
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("FTS Mutant = {}", mutant);
+        LOG.debug("FTS Mutant = {}", mutant);
         State s = mutant.getState("state2");
         assertEquals(1, s.outgoingSize());
         assertThat((FeaturedTransition) s.outgoingTransitions().next(), equalTo(

@@ -42,8 +42,6 @@ import org.slf4j.LoggerFactory;
 
 import be.unamur.transitionsystem.Transition;
 import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import com.bpodgursky.jbool_expressions.Expression;
-import com.bpodgursky.jbool_expressions.parsers.ExprParser;
 
 public class FtsMutableTestCaseTest {
 

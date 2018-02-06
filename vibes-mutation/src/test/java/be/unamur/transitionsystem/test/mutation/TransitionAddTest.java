@@ -55,13 +55,13 @@ import static org.hamcrest.Matchers.hasSize;
 
 public class TransitionAddTest {
 
-    private Logger logger = LoggerFactory.getLogger(TransitionAddTest.class);
+    private Logger LOG = LoggerFactory.getLogger(TransitionAddTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
         @Override
         protected void starting(Description description) {
-            logger.info(String.format("Starting test: %s()...",
+            LOG.info(String.format("Starting test: %s()...",
                     description.getMethodName()));
         }
     ;
@@ -77,7 +77,7 @@ public class TransitionAddTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final State from = system.getState("state2");
         final State to = system.getState("state6");
         final Action action = system.addAction("serveSoda");
@@ -103,7 +103,7 @@ public class TransitionAddTest {
         assertEquals("Wrong To state!", to, op.getTo());
         assertEquals("Wrong Action!", action, op.getAction());
         LabelledTransitionSystem mutant = (LabelledTransitionSystem) op.result();
-        logger.debug("Mutant = {}", mutant);
+        LOG.debug("Mutant = {}", mutant);
         State s = mutant.getState("state2");
         assertNotNull(s);
         assertNotNull(s.getOutTransition(new Transition(s, mutant.getState("state6"), mutant.getAction("serveSoda"))));
@@ -118,7 +118,7 @@ public class TransitionAddTest {
         reader.readDocument();
         LabelledTransitionSystem system = (LabelledTransitionSystem) handler.geTransitionSystem();
         assertNotNull(system);
-        logger.info("Transition System {}", system);
+        LOG.debug("Transition System {}", system);
         final State from = system.getState("state2");
         final State to = system.getState("state6");
         final Action action = system.addAction("serveSoda");
@@ -141,7 +141,7 @@ public class TransitionAddTest {
         });
         op.apply();
         FeaturedTransitionSystem mutant = op.transpose(new FeaturedTransitionSystem(system));
-        logger.debug("FTS Mutant = {}", mutant);
+        LOG.debug("FTS Mutant = {}", mutant);
         State s = mutant.getState("state2");
         Set<FeaturedTransition> trsToCheck = Sets.newHashSet();
         for (Iterator iterator = s.outgoingTransitions(); iterator.hasNext();) {

@@ -6,7 +6,6 @@ import be.unamur.fts.fexpression.configuration.Configuration;
 import be.unamur.fts.solver.Sat4JSolverFacade;
 import be.unamur.fts.solver.SolverFacade;
 import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.dsl.TransitionSystemXmlLoaders;
 import static be.unamur.transitionsystem.dsl.selection.AllStates.*;
 import static be.unamur.transitionsystem.dsl.selection.Random.*;
 import static be.unamur.transitionsystem.dsl.selection.Dissimilar.*;
@@ -28,6 +27,8 @@ import java.util.Iterator;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        /* To be reworked
+        
         FeaturedTransitionSystem svm = new SodaVendingMachineModel().getTransitionSystem();
         System.out.println(Dot.format(svm));
 
@@ -35,7 +36,8 @@ public class Main {
         TestSet testSuite = new ManualTestSuite().getTestSet();
 
         // Feature model loading
-        DimacsModel featureModel = DimacsModel.createFromDimacsFile("svm.splot.dimacs");
+        String dimacsFile = Main.class.getClassLoader().getResource("svm.splot.dimacs").getFile();
+        DimacsModel featureModel = DimacsModel.createFromDimacsFile(dimacsFile);
         SolverFacade solver = new Sat4JSolverFacade(featureModel);
 
         // All-states test suite selection
@@ -64,6 +66,7 @@ public class Main {
         while(solutions.hasNext()) {
             System.out.println(solutions.next());
         }
+    */
 
     }
 
