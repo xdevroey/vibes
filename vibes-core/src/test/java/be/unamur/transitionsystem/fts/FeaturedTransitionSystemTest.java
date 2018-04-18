@@ -25,7 +25,7 @@ package be.unamur.transitionsystem.fts;
  * THE SOFTWARE.
  * #L%
  */
-import be.unamur.fts.fexpression.FExpression;
+import be.vibes.fexpression.FExpression;
 import static org.junit.Assert.*;
 
 import org.junit.Rule;

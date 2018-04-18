@@ -22,7 +22,7 @@ package be.unamur.transitionsystem.fts;
  */
 import java.util.Iterator;
 
-import be.unamur.fts.fexpression.FExpression;
+import be.vibes.fexpression.FExpression;
 import be.unamur.transitionsystem.AbstractTransitionSystem;
 import be.unamur.transitionsystem.Action;
 import be.unamur.transitionsystem.State;

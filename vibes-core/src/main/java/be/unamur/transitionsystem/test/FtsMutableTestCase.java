@@ -24,8 +24,8 @@ import java.util.ArrayList;
 
 import com.google.common.collect.HashMultiset;
 
-import be.unamur.fts.fexpression.FExpression;
-import be.unamur.fts.fexpression.ConstraintTransformation;
+import be.vibes.fexpression.FExpression;
+import be.vibes.fexpression.ConstraintTransformation;
 import be.unamur.transitionsystem.Action;
 import be.unamur.transitionsystem.State;
 import be.unamur.transitionsystem.Transition;

@@ -25,7 +25,7 @@ package be.unamur.transitionsystem.test;
  * THE SOFTWARE.
  * #L%
  */
-import static be.unamur.fts.fexpression.FExpression.*;
+import static be.vibes.fexpression.FExpression.*;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import static be.unamur.transitionsystem.dsl.FeaturedTransitionSystemBuilder.define;

@@ -20,7 +20,7 @@ package be.unamur.transitionsystem.fts;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE. #L%
  */
-import be.unamur.fts.fexpression.FExpression;
+import be.vibes.fexpression.FExpression;
 import be.unamur.transitionsystem.Action;
 import be.unamur.transitionsystem.State;
 import be.unamur.transitionsystem.Transition;

@@ -28,8 +28,8 @@ package be.unamur.transitionsystem.dsl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import be.unamur.fts.fexpression.exception.ParserException;
-import be.unamur.fts.fexpression.ParserUtil;
+import be.vibes.fexpression.exception.ParserException;
+import be.vibes.fexpression.ParserUtil;
 import be.unamur.transitionsystem.Action;
 import be.unamur.transitionsystem.State;
 import be.unamur.transitionsystem.TransitionSystem;
