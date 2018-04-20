@@ -10,24 +10,24 @@ import org.slf4j.LoggerFactory;
 import static com.google.common.base.Preconditions.*;
 import be.vibes.fexpression.FExpression;
 import be.vibes.solver.ConstraintIdentifier;
-import be.vibes.solver.SolverFacade;
 import be.vibes.solver.SolverFatalErrorException;
 import be.vibes.solver.exception.ConstraintNotFoundException;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
+import be.vibes.solver.FeatureModel;
 
 public class ConfigurationSet implements Set<Configuration> {
 
     private static final Logger logger = LoggerFactory.getLogger(ConfigurationSet.class);
 
-    private SolverFacade solver;
+    private FeatureModel solver;
     private FExpression constraint;
 
-    public ConfigurationSet(SolverFacade solver) {
+    public ConfigurationSet(FeatureModel solver) {
         this(solver, FExpression.trueValue());
     }
 
-    public ConfigurationSet(SolverFacade solver, FExpression constraint) {
+    public ConfigurationSet(FeatureModel solver, FExpression constraint) {
         this.solver = solver;
         this.constraint = constraint;
     }

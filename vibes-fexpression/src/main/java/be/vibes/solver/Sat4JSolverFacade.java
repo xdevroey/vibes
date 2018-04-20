@@ -64,7 +64,7 @@ import be.vibes.solver.exception.SolverInitializationException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public class Sat4JSolverFacade implements SolverFacade, Iterator<Configuration> {
+public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> {
 
     private static final Logger logger = LoggerFactory.getLogger(Sat4JSolverFacade.class);
 

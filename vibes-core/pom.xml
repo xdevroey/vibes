@@ -8,6 +8,7 @@
     </parent>
 
     <artifactId>vibes-core</artifactId>
+    <name>VIBeS: core classes</name>
 
     <dependencies>
         <dependency>

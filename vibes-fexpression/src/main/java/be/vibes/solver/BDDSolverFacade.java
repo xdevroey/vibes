@@ -24,7 +24,7 @@ import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
 import static com.google.common.base.Preconditions.*;
 
-public class BDDSolverFacade implements SolverFacade {
+public class BDDSolverFacade implements FeatureModel {
 
     private static final Logger logger = LoggerFactory.getLogger(BDDSolverFacade.class);
 
