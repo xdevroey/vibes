@@ -6,7 +6,7 @@
     <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>VIBeS: Variability Intensive system Behavioural teSting</name>
+    <name>Variability Intensive system Behavioural teSting</name>
     <description>
         This projects aims at providing model-driven testing tools working on Labelled Transition Systems (LTSs), 
         Featured Transition Systems (FTSs) and Usage Models (Deterministic Time Markov Chain) in order to 
@@ -91,7 +91,6 @@
         <!--<module>vibes-mutation</module>-->
         <!--<module>vibes-selection</module>-->
         <!--<module>vibes-transformation</module>-->
-        <!--<module>vibes-execution</module>-->
         <!--<module>vibes-dsl</module>-->
         <!--<module>vibes-toolbox</module>-->
         <!--<module>vibes-example</module>-->

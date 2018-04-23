@@ -1,6 +1,7 @@
 package be.vibes.ts;
 
 import com.google.common.base.Preconditions;
+import java.util.Objects;
 
 /**
  *
@@ -20,6 +21,33 @@ public class Action extends TransitionSystemElement{
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Action{" + "name=" + name + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Action other = (Action) obj;
+        return Objects.equals(this.name, other.name);
     }
     
 }

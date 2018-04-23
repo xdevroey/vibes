@@ -26,7 +26,7 @@ public class Execution implements Iterable<Transition> {
         return this.transitions.iterator();
     }
     
-    public void enqueue(Transition transition) throws TransitionSystenExecutionException {
+    public Execution enqueue(Transition transition) throws TransitionSystenExecutionException {
         if (transitions.isEmpty()) {
             transitions.add(transition);
         } else {
@@ -38,17 +38,20 @@ public class Execution implements Iterable<Transition> {
                 this.transitions.addLast(transition);
             }
         }
+        return this;
     }
     
-    public void enqueueAll(Iterable<Transition> transitions) throws TransitionSystenExecutionException {
+    public Execution enqueueAll(Iterable<Transition> transitions) throws TransitionSystenExecutionException {
         for (Transition tr : transitions) {
             enqueue(tr);
         }
+        return this;
     }
     
-    public Transition dequeue() {
+    public Execution dequeue() {
         Preconditions.checkElementIndex(0, this.transitions.size(), "Execution is empty!");
-        return this.transitions.removeLast();
+        this.transitions.removeLast();
+        return this;
     }
     
     public Transition getFirst(){
