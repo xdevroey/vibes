@@ -1,5 +1,7 @@
 package be.vibes.solver;
 
+import be.vibes.fexpression.FExpression;
+
 /*
  * #%L
  * VIBeS: featured expressions
@@ -26,5 +28,7 @@ package be.vibes.solver;
  * #L%
  */
 public interface ConstraintIdentifier {
+    
+    public FExpression getConstraint();
 
 }

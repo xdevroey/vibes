@@ -151,7 +151,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
     public ConstraintIdentifier addConstraint(FExpression constraint)
             throws SolverInitializationException, SolverFatalErrorException {
         logger.trace("Adding expression {} to solver", constraint);
-        Sat4JContraintIdentifier id = new Sat4JContraintIdentifier();
+        Sat4JContraintIdentifier id = new Sat4JContraintIdentifier(constraint);
         // If the node is true, stop
         if (constraint.equals(FExpression.trueValue())) {
             return id;

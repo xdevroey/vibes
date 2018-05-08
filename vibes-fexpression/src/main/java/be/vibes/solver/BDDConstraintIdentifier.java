@@ -1,5 +1,11 @@
 package be.vibes.solver;
 
-public class BDDConstraintIdentifier implements ConstraintIdentifier {
+import be.vibes.fexpression.FExpression;
 
+public class BDDConstraintIdentifier extends DefaultConstraintIdentifier {
+    
+    BDDConstraintIdentifier(FExpression constraint) {
+        super(constraint);
+    }
+    
 }

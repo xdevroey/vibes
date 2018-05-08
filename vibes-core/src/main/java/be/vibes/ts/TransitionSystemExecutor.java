@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- *
+ * Allows to execute a TransitionSystem.
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
 public class TransitionSystemExecutor {
@@ -26,47 +26,40 @@ public class TransitionSystemExecutor {
         this.executions = new ArrayList<>();
     }
 
-    public boolean canExecute(String action) {
+    public boolean canExecute(String action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
-        Action act = ts.getAction(action);
-        checkNotNull(act, "Action {} does not belong to the transition system!", action);
-        return canExecute(act);
+        Action act = getTransitionSystem().getAction(action);
+        checkArgument(act != null, "Action {} does not belong to the transition system!", action);
+        return TransitionSystemExecutor.this.canExecute(act);
     }
-    
-    public boolean canExecute(Action action) {
+
+    public boolean canExecute(Action action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
         boolean canExecute = false;
         if (executions.isEmpty()) {
             LOG.trace("No execution found, will start from initial state!");
-            canExecute = canExecuteFromState(ts.getInitialState(), action);
+            canExecute = canExecute(null, action);
         } else {
             Iterator<Execution> it = executions.iterator();
             State s;
             while (!canExecute && it.hasNext()) {
-                s = it.next().getLast().getTarget();
-                LOG.trace("Executions found, will start from state {}!", s);
-                canExecute = canExecuteFromState(s, action);
+                Execution current = it.next();
+                LOG.trace("Executions found, will start from state {}!", current.getLast().getTarget());
+                canExecute = canExecute(current, action);
             }
         }
         return canExecute;
     }
 
-    private boolean canExecuteFromState(State state, Action action) {
-        checkNotNull(state, "State may not be null!");
+    private boolean canExecute(Execution current, Action action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
-        boolean canExecute = false;
-        Iterator<Transition> it = ts.getOutgoing(state);
-        while (!canExecute && it.hasNext()) {
-            Transition tr = it.next();
-            canExecute = tr.getAction().equals(action);
-        }
-        return canExecute;
+        return !getNextTransitions(current, action).isEmpty();
     }
-    
+
     public void execute(String action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
-        checkNotNull(ts.getAction(action), "Action {} does not belong to the transition system!", action);
-        execute(ts.getAction(action));
+        checkNotNull(getTransitionSystem().getAction(action), "Action {} does not belong to the transition system!", action);
+        execute(getTransitionSystem().getAction(action));
     }
 
     public void execute(Action action) throws TransitionSystenExecutionException {
@@ -82,28 +75,25 @@ public class TransitionSystemExecutor {
         }
     }
 
-    private boolean startsFromInitialState(Action action) {
-        Iterator<Transition> it = ts.getOutgoing(ts.getInitialState());
-        boolean executed = false;
-        while (it.hasNext()) {
-            Transition tr = it.next();
-            if (executed = tr.getAction().equals(action)) {
-                try {
-                    this.executions.add(new Execution().enqueue(tr));
-                } catch (TransitionSystenExecutionException ex) {
-                    // This should not happen given Execution class invariant 
-                    LOG.error("Transition could not be added to execution!", ex);
-                }
+    private boolean startsFromInitialState(Action action) throws TransitionSystenExecutionException {
+        List<Transition> nextTransitions = getNextTransitions(null, action);
+        boolean executed = !nextTransitions.isEmpty();
+        for (Transition tr : nextTransitions) {
+            try {
+                this.executions.add(new Execution().enqueue(tr));
+            } catch (TransitionSystenExecutionException ex) {
+                // This should not happen given Execution class invariant 
+                LOG.error("Transition could not be added to execution (Execution class invariant violated)!", ex);
             }
         }
         return executed;
     }
 
-    private boolean startsFromLastsTargets(Action action) {
+    private boolean startsFromLastsTargets(Action action) throws TransitionSystenExecutionException {
         List<Execution> newExecutions = new ArrayList<>();
         boolean executed = false;
         for (Execution exec : this.executions) {
-            List<Transition> nextTransitions = getNextTransitions(exec.getLast().getTarget(), action);
+            List<Transition> nextTransitions = getNextTransitions(exec, action);
             if (executed = !nextTransitions.isEmpty()) {
                 for (Transition tr : nextTransitions) {
                     try {
@@ -119,9 +109,11 @@ public class TransitionSystemExecutor {
         return executed;
     }
 
-    private List<Transition> getNextTransitions(State source, Action action) {
+    protected List<Transition> getNextTransitions(Execution current, Action action) throws TransitionSystenExecutionException {
+        checkNotNull(action, "Action may not be null!");
+        State source = current == null ? getTransitionSystem().getInitialState() : current.getLast().getTarget();
         List<Transition> next = new ArrayList<>();
-        Iterator<Transition> it = ts.getOutgoing(source);
+        Iterator<Transition> it = getTransitionSystem().getOutgoing(source);
         while (it.hasNext()) {
             Transition tr = it.next();
             if (tr.getAction().equals(action)) {
@@ -135,4 +127,8 @@ public class TransitionSystemExecutor {
         return this.executions.iterator();
     }
 
+    protected TransitionSystem getTransitionSystem() {
+        return ts;
+    }
+    
 }

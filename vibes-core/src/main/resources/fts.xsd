@@ -3,7 +3,7 @@
         xmlns="http://www.w3.org/2001/XMLSchema" xmlns:fts="http://www.unamur.be/xml/fts/"
         elementFormDefault="qualified" >
 
-    <element name="fts">
+    <element name="ts">
         <complexType>
             <sequence>
                 <element name="start" type="IDREF" />

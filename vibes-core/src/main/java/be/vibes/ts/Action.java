@@ -9,7 +9,9 @@ import java.util.Objects;
  */
 public class Action extends TransitionSystemElement{
     
-    static final Action EPSILON = new Action("epsilon");
+    public static final String EPSILON_ACTION = "epsilon";
+    
+    static final Action EPSILON = new Action(EPSILON_ACTION);
     
     private final String name;
 

@@ -25,20 +25,22 @@ package be.vibes.solver;
  * THE SOFTWARE.
  * #L%
  */
+import be.vibes.fexpression.FExpression;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.sat4j.specs.IConstr;
 
-public class Sat4JContraintIdentifier implements ConstraintIdentifier {
+public class Sat4JContraintIdentifier extends DefaultConstraintIdentifier {
 
-    private ArrayList<IConstr> sat4JConstraints;
+    private final ArrayList<IConstr> sat4JConstraints;
 
-    private ArrayList<int[]> dimacsConstraints;
+    private final ArrayList<int[]> dimacsConstraints;
 
-    Sat4JContraintIdentifier() {
-        this.sat4JConstraints = new ArrayList<IConstr>();
-        this.dimacsConstraints = new ArrayList<int[]>();
+    Sat4JContraintIdentifier(FExpression constraint) {
+        super(constraint);
+        this.sat4JConstraints = new ArrayList<>();
+        this.dimacsConstraints = new ArrayList<>();
     }
 
     void addSat4JConstraint(IConstr constr, int[] dimacsRepr) {

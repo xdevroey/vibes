@@ -89,7 +89,7 @@ public class BDDSolverFacade implements FeatureModel {
     public ConstraintIdentifier addConstraint(FExpression constraint)
             throws SolverInitializationException, SolverFatalErrorException {
         try {
-            ConstraintIdentifier id = new BDDConstraintIdentifier();
+            ConstraintIdentifier id = new BDDConstraintIdentifier(constraint);
             BDD c = constraint.accept(new FExpressionBDDBuilder(this.factory, this.featureMapping));
             constraints.put(id, c);
             if(modelAndContraints != null){
