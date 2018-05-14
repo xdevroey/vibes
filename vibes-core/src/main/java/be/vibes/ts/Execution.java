@@ -22,7 +22,7 @@ public class Execution implements Iterable<Transition> {
     }
     
     @Override
-    public Iterator iterator() {
+    public Iterator<Transition> iterator() {
         return this.transitions.iterator();
     }
     

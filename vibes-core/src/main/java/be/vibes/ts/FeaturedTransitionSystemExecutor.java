@@ -79,7 +79,7 @@ public class FeaturedTransitionSystemExecutor extends TransitionSystemExecutor {
         }
     }
 
-    private FExpression getFexpression(Execution current) {
+    public FExpression getFexpression(Execution current) {
         FExpression expr = FExpression.trueValue();
         for (Transition tr : current) {
             expr.andWith(getTransitionSystem().getFExpression(tr));

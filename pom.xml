@@ -59,7 +59,7 @@
         <junit.version>4.12</junit.version>
 <!--<log4j.version>1.2.16</log4j.version>-->
         <log4j2.version>2.11.0</log4j2.version>
-<!--<mockito-core.version>1.10.19</mockito-core.version>-->
+        <mockito-core.version>2.18.3</mockito-core.version>
 <!--<mysql-connector-java.version>5.1.26</mysql-connector-java.version>-->
 <!--<named-regexp.version>0.2.3</named-regexp.version>-->
         <org.ow2.sat4j.core.version>2.3.5</org.ow2.sat4j.core.version>
@@ -89,7 +89,7 @@
         <module>vibes-fexpression</module>
         <module>vibes-core</module>
         <!--<module>vibes-mutation</module>-->
-        <!--<module>vibes-selection</module>-->
+        <module>vibes-selection</module>
         <!--<module>vibes-transformation</module>-->
         <!--<module>vibes-dsl</module>-->
         <!--<module>vibes-toolbox</module>-->

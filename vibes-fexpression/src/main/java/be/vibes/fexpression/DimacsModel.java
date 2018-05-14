@@ -24,7 +24,7 @@ import static com.google.common.base.Preconditions.*;
 
 public class DimacsModel {
 
-    private static final Logger logger = LoggerFactory.getLogger(DimacsModel.class);
+    private static final Logger LOG = LoggerFactory.getLogger(DimacsModel.class);
 
     public static DimacsModel createFromTvlParserMappingFile(File mapping) throws IOException {
         return new DimacsModel(mapping, null);
@@ -91,7 +91,7 @@ public class DimacsModel {
 
     private DimacsModel(File dimacs) throws IOException {
         // Read mapping 
-        logger.debug("Read mapping");
+        LOG.debug("Read mapping");
         featureMapping = HashBiMap.create();
         String[] tabLine;
         int nbrClauses = 0;
@@ -99,10 +99,10 @@ public class DimacsModel {
         dimacsFD = Lists.newArrayList();
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
                 .split(Files.toString(dimacs, Charsets.UTF_8))) {
-            logger.trace("line = " + line);
+            LOG.trace("line = " + line);
             tabLine = line.split(" ");
             if (tabLine.length == 0 || tabLine[0].equals("p")) {
-                logger.debug("Skip line '{}' in dimacs file {}",
+                LOG.debug("Skip line '{}' in dimacs file {}",
                         Joiner.on(' ').join(tabLine), dimacs.getPath());
             } else if (tabLine[0].equals("c")) {
                 featureMapping.put(tabLine[2], Integer.valueOf(tabLine[1]));
@@ -116,7 +116,7 @@ public class DimacsModel {
                 nbrClauses++;
             }
         }
-        logger.debug("{} clauses added to the solver", nbrClauses);
+        LOG.debug("{} clauses added to the solver", nbrClauses);
         // FExpression building
         buildFDFromFile();
     }
@@ -125,34 +125,34 @@ public class DimacsModel {
         checkArgument(mapping.exists() && mapping.isFile(), "Mapping file %s not found!", mapping);
         checkArgument((dimacs == null) || (dimacs.exists() && dimacs.isFile()), "Dimacs file %s not found!", dimacs);
         // Read mapping 
-        logger.debug("Read mapping");
+        LOG.debug("Read mapping");
         featureMapping = HashBiMap.create();
         String[] tabLine;
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
                 .split(Files.toString(mapping, Charsets.UTF_8))) {
-            logger.trace("line = " + line);
+            LOG.trace("line = " + line);
             tabLine = line.split(" ");
             if (tabLine.length >= 1 || tabLine.length <= 2) {
                 featureMapping.put(
                         tabLine.length > 1 ? tabLine[1] : Integer.toString(featureMapping
                                         .size() + 1), Integer.valueOf(tabLine[0]));
             } else {
-                logger.info("Skipping line {} in feature id mapping", line);
+                LOG.info("Skipping line {} in feature id mapping", line);
             }
         }
         // Read DIMACS (if there is one)
         dimacsFD = Lists.newArrayList();
         if (dimacs != null) {
-            logger.debug("Read DIMACS");
+            LOG.debug("Read DIMACS");
             int nbrClauses = 0;
             int[] clause;
             for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
                     .split(Files.toString(dimacs, Charsets.UTF_8))) {
-                logger.trace("line = " + line);
+                LOG.trace("line = " + line);
                 tabLine = line.split(" ");
-                logger.trace("tabLine = {}", Arrays.toString(tabLine));
+                LOG.trace("tabLine = {}", Arrays.toString(tabLine));
                 if (tabLine.length == 0 || tabLine[0].equals("c") || tabLine[0].equals("p")) {
-                    logger.debug("Skip line '{}' in dimacs file {}",
+                    LOG.debug("Skip line '{}' in dimacs file {}",
                             Joiner.on(' ').join(tabLine), dimacs.getPath());
                 } else {
                     clause = new int[tabLine.length - 1]; // last char is a 0 in
@@ -164,9 +164,9 @@ public class DimacsModel {
                     nbrClauses++;
                 }
             }
-            logger.debug("{} clauses added to the solver", nbrClauses);
+            LOG.debug("{} clauses added to the solver", nbrClauses);
         } else {
-            logger.debug("No DIMACS provided, FD will be 'true'");
+            LOG.debug("No DIMACS provided, FD will be 'true'");
         }
         // FExpression building
         buildFDFromFile();
@@ -195,7 +195,7 @@ public class DimacsModel {
                             disj.orWith(new FExpression(feat).not());
                         }
                     } else {
-                        logger.trace("End of DIMACS line reached");
+                        LOG.trace("End of DIMACS line reached");
                     }
                 }
                 fd.andWith(disj);
