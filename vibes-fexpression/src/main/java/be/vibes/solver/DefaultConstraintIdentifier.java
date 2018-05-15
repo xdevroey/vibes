@@ -18,5 +18,10 @@ public class DefaultConstraintIdentifier implements ConstraintIdentifier {
     public FExpression getConstraint() {
         return constraint;
     }
+
+    @Override
+    public String toString() {
+        return "DefaultConstraintIdentifier{" + "constraint=" + constraint + '}';
+    }
     
 }

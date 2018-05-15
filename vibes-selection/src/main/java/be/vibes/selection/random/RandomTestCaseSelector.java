@@ -86,14 +86,14 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
     private TestCase trySelect() throws SinkStateReachedException {
         TransitionSystem ts = getTransitionSystem();
         TestCase tc = new TestCase("random" + (this.id++));
-        Transition tr = getRandomTransition(ts.getInitialState(), ts);
+        Transition tr = getRandomTransition(null);
         State last;
         try {
             tc.enqueue(tr);
             last = tc.getLast().getTarget();
             int length = 1;
             while (!last.equals(ts.getInitialState()) && length < getMaxLength()) {
-                tr = getRandomTransition(last, ts);
+                tr = getRandomTransition(tc);
                 tc.enqueue(tr);
                 last = tc.getLast().getTarget();
                 length++;
@@ -112,9 +112,9 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
         }
     }
 
-    private Transition getRandomTransition(State state, TransitionSystem ts) throws SinkStateReachedException {
-        Preconditions.checkNotNull(state, "Given state may not be null!");
-        Preconditions.checkNotNull(ts, "Given transition system may not be null!");
+    protected Transition getRandomTransition(TestCase tc) throws SinkStateReachedException {
+        TransitionSystem ts = getTransitionSystem();
+        State state = tc == null ? ts.getInitialState() : tc.getLast().getTarget();
         List<Transition> outgoings = Lists.newArrayList(ts.getOutgoing(state));
         if (outgoings.isEmpty()) {
             throw new SinkStateReachedException("Sink state " + state + " reached, could not select next transition!", state);

@@ -59,7 +59,7 @@ public class DissimilarTestCaseSelector extends AbstractTestCaseSelector {
     @Override
     public List<TestCase> select(int nbr) throws TestCaseSelectionException {
         DissimilarTestSet set;
-        RandomTestCaseSelector gen = new RandomTestCaseSelector(getTransitionSystem());
+        RandomTestCaseSelector gen = getRandomTestCaseSelector();
         try {
             LOG.debug("Generating initial population");
             set = new DissimilarTestSet(gen.select(nbr), prioritization);
@@ -90,6 +90,10 @@ public class DissimilarTestCaseSelector extends AbstractTestCaseSelector {
         }
         LOG.debug("Final fitness = {}", lastFitness);
         return Lists.newArrayList(set);
+    }
+
+    protected RandomTestCaseSelector getRandomTestCaseSelector() {
+        return new RandomTestCaseSelector(getTransitionSystem());
     }
 
 }
