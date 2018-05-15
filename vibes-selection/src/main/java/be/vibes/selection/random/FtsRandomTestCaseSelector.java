@@ -4,8 +4,6 @@ import be.vibes.fexpression.FExpression;
 import be.vibes.selection.exception.SinkStateReachedException;
 import be.vibes.solver.ConstraintIdentifier;
 import be.vibes.solver.FeatureModel;
-import be.vibes.solver.SolverFatalErrorException;
-import be.vibes.solver.exception.ConstraintNotFoundException;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
 import be.vibes.ts.FeaturedTransitionSystem;
@@ -16,7 +14,6 @@ import be.vibes.ts.Transition;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

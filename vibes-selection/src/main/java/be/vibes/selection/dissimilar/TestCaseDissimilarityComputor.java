@@ -4,8 +4,6 @@ import be.vibes.selection.exception.DissimilarityComputationException;
 import be.vibes.ts.Action;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.Transition;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;

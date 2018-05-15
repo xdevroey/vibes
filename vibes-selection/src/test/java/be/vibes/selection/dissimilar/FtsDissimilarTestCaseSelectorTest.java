@@ -1,10 +1,6 @@
 package be.vibes.selection.dissimilar;
 
 import be.vibes.fexpression.DimacsModel;
-import be.vibes.selection.dissimilar.FtsDissimilarTestCaseSelector;
-import be.vibes.selection.dissimilar.FtsTestCaseDissimilarityComputor;
-import be.vibes.selection.dissimilar.LocalMaximumDistancePrioritization;
-import be.vibes.selection.dissimilar.GlobalMaximumDistancePrioritization;
 import be.vibes.solver.BDDSolverFacade;
 import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.TestCase;

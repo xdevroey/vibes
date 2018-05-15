@@ -8,7 +8,6 @@ import be.vibes.ts.TestCase;
 import be.vibes.ts.Transition;
 import be.vibes.ts.TransitionSystem;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
 import java.util.List;
