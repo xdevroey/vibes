@@ -8,7 +8,7 @@
 
     <name>Variability Intensive system Behavioural teSting</name>
     <description>
-        This projects aims at providing model-driven testing tools working on Labelled Transition Systems (LTSs), 
+        This projects aims at providing model-driven testing tools working on Transition Systems (TSs), 
         Featured Transition Systems (FTSs) and Usage Models (Deterministic Time Markov Chain) in order to 
         perform classical testing tasks: test case selection, prioritization, mutation testing, etc. 
     </description>
@@ -91,7 +91,7 @@
         <!--<module>vibes-mutation</module>-->
         <module>vibes-selection</module>
         <!--<module>vibes-transformation</module>-->
-        <!--<module>vibes-dsl</module>-->
+        <module>vibes-dsl</module>
         <!--<module>vibes-toolbox</module>-->
         <!--<module>vibes-example</module>-->
     </modules>

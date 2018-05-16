@@ -4,7 +4,7 @@
     <parent>
         <groupId>be.unamur.info</groupId>
         <artifactId>vibes</artifactId>
-        <version>1.1.6-SNAPSHOT</version>
+        <version>2.0.0-SNAPSHOT</version>
     </parent>
   
     <artifactId>vibes-dsl</artifactId>
@@ -15,21 +15,13 @@
             <artifactId>vibes-core</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>be.unamur.info</groupId>
-            <artifactId>vibes-transformation</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>be.unamur.info</groupId>
-            <artifactId>vibes-execution</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+<!--
         <dependency>
             <groupId>be.unamur.info</groupId>
             <artifactId>vibes-mutation</artifactId>
             <version>${project.version}</version>
         </dependency>
+-->
         <dependency>
             <groupId>be.unamur.info</groupId>
             <artifactId>vibes-selection</artifactId>
@@ -47,53 +39,32 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito-core.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <version>${hamcrest-all.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j2.version}</version>
         </dependency>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.mail</groupId>
-                    <artifactId>mail</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.jms</groupId>
-                    <artifactId>jms</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jdmk</groupId>
-                    <artifactId>jmxtools</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.jmx</groupId>
-                    <artifactId>jmxri</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${log4j2.version}</version>
+        </dependency>       
     </dependencies>
-	
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
-    </build>
-  
+
 </project>
