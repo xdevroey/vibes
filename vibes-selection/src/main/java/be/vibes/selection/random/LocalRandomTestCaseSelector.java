@@ -54,6 +54,10 @@ public class LocalRandomTestCaseSelector extends RandomTestCaseSelector {
     public LocalRandomTestCaseSelector(TransitionSystem transitionSystem, Set<State> localStates) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH, localStates);
     }
+    
+    public LocalRandomTestCaseSelector(TransitionSystem transitionSystem, int maxLength, Set<State> localStates) {
+        this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, maxLength, localStates);
+    }
 
     @Override
     public TestCase select() throws TestCaseSelectionException {

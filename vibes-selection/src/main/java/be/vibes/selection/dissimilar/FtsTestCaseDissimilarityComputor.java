@@ -25,9 +25,9 @@ public class FtsTestCaseDissimilarityComputor extends TestCaseDissimilarityCompu
             .getLogger(FtsTestCaseDissimilarityComputor.class);
 
     private final TestCaseDissimilarityComputor testCaseDissimilarity;
-    private final FeatureModel fm;
+    private FeatureModel fm;
     private final BinaryOperator<Double> combineOperator;
-    private final FeaturedTransitionSystem fts;
+    private FeaturedTransitionSystem fts;
 
     public FtsTestCaseDissimilarityComputor(FeatureModel solver, FeaturedTransitionSystem fts) {
         this(solver, new JaccardDissimilarityComputor(), fts);
@@ -52,6 +52,14 @@ public class FtsTestCaseDissimilarityComputor extends TestCaseDissimilarityCompu
         this(solver, TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(computor), fts);
     }
 
+    public void setFm(FeatureModel fm) {
+        this.fm = fm;
+    }
+
+    public void setFts(FeaturedTransitionSystem fts) {
+        this.fts = fts;
+    }
+    
     @Override
     public double dissimilarity(TestCase o1, TestCase o2) throws DissimilarityComputationException {
         double dissimilarity = testCaseDissimilarity.dissimilarity(o1, o2);

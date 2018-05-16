@@ -23,6 +23,10 @@ public class UsageDrivenRandomSelector extends RandomTestCaseSelector {
         super(um);
     }
 
+    public UsageDrivenRandomSelector(UsageModel um, int maxLength) {
+        super(um, maxLength);
+    }
+
     @Override
     public UsageModel getTransitionSystem() {
         return (UsageModel) super.getTransitionSystem();

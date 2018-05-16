@@ -35,9 +35,11 @@ public class FtsRandomTestCaseSelector extends RandomTestCaseSelector {
     }
 
     public FtsRandomTestCaseSelector(FeaturedTransitionSystem fts, FeatureModel fm) {
-        super(fts);
-        this.fm = fm;
-        this.exec = new FeaturedTransitionSystemExecutor(fts, fm);
+        this(fts, fm, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH);
+    }
+    
+    public FtsRandomTestCaseSelector(FeaturedTransitionSystem fts, FeatureModel fm, int maxLength) {
+        this(fts, fm, DEFAULT_MAX_NUMBER_TRY, maxLength);
     }
 
     @Override

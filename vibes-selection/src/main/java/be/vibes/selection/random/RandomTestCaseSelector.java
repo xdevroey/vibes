@@ -43,6 +43,10 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
     public RandomTestCaseSelector(TransitionSystem transitionSystem) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH);
     }
+ 
+    public RandomTestCaseSelector(TransitionSystem transitionSystem,int maxLength) {
+        this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, maxLength);
+    }
 
     public int getMaxNbrAttempts() {
         return maxNbrAttempts;
