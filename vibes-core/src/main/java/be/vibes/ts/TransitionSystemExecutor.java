@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Allows to execute a TransitionSystem.
+ *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
 public class TransitionSystemExecutor {
@@ -56,12 +57,33 @@ public class TransitionSystemExecutor {
         return !getNextTransitions(current, action).isEmpty();
     }
 
+    /**
+     * Execute the action that has the given name on the transition system or
+     * throws a TransitionSystenExecutionException if the action cannot be
+     * executed.
+     *
+     * @param action The action to execute.
+     * @throws NullPointerException If the action name is null.
+     * @throws IllegalArgumentException If the action name does not corresponds
+     * to an action of the transition system.
+     * @throws TransitionSystenExecutionException If the action cannot be
+     * executed.
+     */
     public void execute(String action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
-        checkNotNull(getTransitionSystem().getAction(action), "Action {} does not belong to the transition system!", action);
+        checkArgument(getTransitionSystem().getAction(action) != null, "Action {} does not belong to the transition system!", action);
         execute(getTransitionSystem().getAction(action));
     }
 
+    /**
+     * Execute the given action on the transition system or throws a
+     * TransitionSystenExecutionException if the action cannot be executed.
+     *
+     * @param action The action to execute.
+     * @throws NullPointerException If the action is null.
+     * @throws TransitionSystenExecutionException If the action cannot be
+     * executed.
+     */
     public void execute(Action action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
         boolean executed;
@@ -123,6 +145,13 @@ public class TransitionSystemExecutor {
         return next;
     }
 
+    /**
+     * Returns the current executions. Each execution is a path in the
+     * transition system that has been followed by execution the previous
+     * actions.
+     *
+     * @return The current paths followed in the transition system.
+     */
     public Iterator<Execution> getCurrentExecutions() {
         return this.executions.iterator();
     }
@@ -130,5 +159,5 @@ public class TransitionSystemExecutor {
     protected TransitionSystem getTransitionSystem() {
         return ts;
     }
-    
+
 }

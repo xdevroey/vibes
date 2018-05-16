@@ -1,6 +1,7 @@
 package be.vibes.ts.io.xml;
 
 import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
 import be.vibes.ts.UsageModel;
 import be.vibes.ts.exception.TransitionSystemDefinitionException;
@@ -17,7 +18,7 @@ import javax.xml.stream.XMLStreamException;
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
 public class XmlSavers {
-    
+
     /**
      * Prints the given TS on the given output in XML format.
      *
@@ -28,7 +29,7 @@ public class XmlSavers {
      */
     public static void save(TransitionSystem ts, OutputStream out) throws TransitionSystemDefinitionException {
         TransitionSystemPrinter printer = new TransitionSystemPrinter();
-        XmlPrinter xmlOut = new XmlPrinter(out, printer);
+        TransitionSystemXmlPrinter xmlOut = new TransitionSystemXmlPrinter(out, printer);
         try {
             xmlOut.print(ts);
         } catch (XMLStreamException e) {
@@ -74,7 +75,7 @@ public class XmlSavers {
      */
     public static void save(FeaturedTransitionSystem fts, OutputStream out) throws TransitionSystemDefinitionException {
         FeaturedTransitionSystemPrinter printer = new FeaturedTransitionSystemPrinter();
-        XmlPrinter xmlOut = new XmlPrinter(out, printer);
+        TransitionSystemXmlPrinter xmlOut = new TransitionSystemXmlPrinter(out, printer);
         try {
             xmlOut.print(fts);
         } catch (XMLStreamException e) {
@@ -120,7 +121,7 @@ public class XmlSavers {
      */
     public static void save(UsageModel usageModel, OutputStream out) throws TransitionSystemDefinitionException {
         UsageModelPrinter printer = new UsageModelPrinter();
-        XmlPrinter xmlOut = new XmlPrinter(out, printer);
+        TransitionSystemXmlPrinter xmlOut = new TransitionSystemXmlPrinter(out, printer);
         try {
             xmlOut.print(usageModel);
         } catch (XMLStreamException e) {
@@ -156,5 +157,36 @@ public class XmlSavers {
     public static void save(UsageModel usageModel, String outputFileName) throws TransitionSystemDefinitionException {
         save(usageModel, new File(outputFileName));
     }
+        
+    public static void save(TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
+        TestCasePrinter printer = new TestCasePrinter();
+        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        try {
+            xmlOut.print(set);
+        } catch (XMLStreamException e) {
+            throw new TransitionSystemDefinitionException("Exception while printing XML!", e);
+        }
+    }
+    
+    public static void save(FeaturedTransitionSystem fts, TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
+        FtsTestCasePrinter printer = new FtsTestCasePrinter(fts);
+        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        try {
+            xmlOut.print(set);
+        } catch (XMLStreamException e) {
+            throw new TransitionSystemDefinitionException("Exception while printing XML!", e);
+        }
+    }
+    
+    public static void save(UsageModel um, TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
+        UsageModelTestCasePrinter printer = new UsageModelTestCasePrinter(um);
+        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        try {
+            xmlOut.print(set);
+        } catch (XMLStreamException e) {
+            throw new TransitionSystemDefinitionException("Exception while printing XML!", e);
+        }
+    }
+    
 
 }

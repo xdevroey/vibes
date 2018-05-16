@@ -13,7 +13,7 @@ import javax.xml.stream.XMLStreamWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TransitionSystemPrinter implements ElementPrinter {
+public class TransitionSystemPrinter implements TransitionSystemElementPrinter {
 
     private static final Logger LOG = LoggerFactory.getLogger(TransitionSystemPrinter.class);
 

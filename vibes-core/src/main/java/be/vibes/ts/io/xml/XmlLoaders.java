@@ -1,7 +1,9 @@
 package be.vibes.ts.io.xml;
 
+import be.vibes.solver.FeatureModel;
 import be.vibes.ts.exception.TransitionSystemDefinitionException;
 import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
 import be.vibes.ts.UsageModel;
 import java.io.File;
@@ -169,6 +171,30 @@ public class XmlLoaders {
      */
     public static UsageModel loadUsageModel(String xmlFile) throws TransitionSystemDefinitionException {
         return loadUsageModel(new File(xmlFile));
+    }
+
+    public static TestSet loadTestSet(InputStream in, TransitionSystem ts) throws TransitionSystemDefinitionException {
+        TestCaseHandler handler = new TestCaseHandler(ts);
+        try {
+            XmlReader reader = new XmlReader(handler, in);
+            reader.readDocument();
+        } catch (XMLStreamException e) {
+            LOG.error("Error while reading TS input!", e);
+            throw new TransitionSystemDefinitionException("Error while reading TS!", e);
+        }
+        return handler.getTestSet();
+    }
+
+    public static TestSet loadTestSet(InputStream in, FeaturedTransitionSystem fts, FeatureModel fm) throws TransitionSystemDefinitionException {
+        FtsTestCaseHandler handler = new FtsTestCaseHandler(fts, fm);
+        try {
+            XmlReader reader = new XmlReader(handler, in);
+            reader.readDocument();
+        } catch (XMLStreamException e) {
+            LOG.error("Error while reading TS input!", e);
+            throw new TransitionSystemDefinitionException("Error while reading TS!", e);
+        }
+        return handler.getTestSet();
     }
 
 }
