@@ -71,7 +71,7 @@
         <antlr4-maven-plugin.version>${antlr.version}</antlr4-maven-plugin.version>
         <build-helper-maven-plugin.version>1.12</build-helper-maven-plugin.version>
         <license-maven-plugin.version>2.11</license-maven-plugin.version>
-<!--<maven-assembly-plugin.version>2.5.2</maven-assembly-plugin.version>-->
+<!--<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>-->
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
 <!--<maven-jaxb-plugin.version>1.3</maven-jaxb-plugin.version>-->

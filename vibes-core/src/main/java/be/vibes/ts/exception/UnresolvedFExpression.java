@@ -1,5 +1,7 @@
 package be.vibes.ts.exception;
 
+import be.vibes.fexpression.FExpression;
+
 /**
  * Represents errors during the resolution of feature expressions (
  * {@link FExpression}).
