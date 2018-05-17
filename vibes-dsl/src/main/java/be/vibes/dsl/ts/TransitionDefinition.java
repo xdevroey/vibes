@@ -6,8 +6,6 @@ import be.vibes.ts.Action;
  * This class is used to define transitions in the define() method of a
  * LabelledTransitionSystemDefinition instance.
  *
- * @see LabelledTransitionSystemDefinition
- *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
 public class TransitionDefinition {
