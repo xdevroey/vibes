@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 /**
  * An execution (also called behavior) of M is a non-empty, infinite sequence
- * seq = s0 a1 s1 a2 . . . With s0 = i such that (si -- ai+1 --> si+1) for all 0
+ * seq = s0 a1 s1 a2 . . . With s0 = i such that (si -- ai+1 --&gt; si+1) for all 0
  * &le; i.
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com

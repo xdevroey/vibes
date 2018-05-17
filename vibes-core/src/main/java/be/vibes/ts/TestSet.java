@@ -42,7 +42,7 @@ public class TestSet implements Iterable<TestCase> {
 
     /**
      * Add the given test case to the set.
-     * @param tc
+     * @param tc The test case to add.
      */
     public void add(TestCase tc) {
         this.testCases.add(tc);
@@ -51,7 +51,7 @@ public class TestSet implements Iterable<TestCase> {
     /**
      * Removes the given test case from the set.
      *
-     * @param tc
+     * @param tc The test case to remove.
      * @return True if the test case has been removed (if it belongs to the set)
      * and false otherwise.
      */
@@ -61,8 +61,8 @@ public class TestSet implements Iterable<TestCase> {
 
     /**
      * Returns true if the set contains the given test case.
-     * @param tc
-     * @return 
+     * @param tc The test case to check.
+     * @return True if the set contains the given test case.
      */
     public boolean contains(TestCase tc) {
         return this.testCases.contains(tc);
@@ -70,7 +70,7 @@ public class TestSet implements Iterable<TestCase> {
 
     /**
      * Returns the number of test cases in the set.s
-     * @return 
+     * @return The number of test cases in the set.s
      */
     public int size() {
         return testCases.size();
@@ -78,8 +78,8 @@ public class TestSet implements Iterable<TestCase> {
 
     /**
      * Returns the test case at position 'index'.
-     * @param index
-     * @return 
+     * @param index The position of the test case to retrieve.
+     * @return The test case at position 'index'.
      */
     public TestCase get(int index) {
         return this.testCases.get(index);

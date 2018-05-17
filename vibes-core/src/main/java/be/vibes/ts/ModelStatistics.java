@@ -12,13 +12,13 @@ public interface ModelStatistics {
 
     /**
      * Return a string representing the model statistics.
-     * @return 
+     * @return A string representing the model statistics.
      */
     public abstract String getStatistics();
 
     /**
      * Returns a Map containing model statistics (key, value).
-     * @return 
+     * @return A Map containing model statistics (key, value).
      */
     public abstract Map<String, Object> getStatisticsValues();
 

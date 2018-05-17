@@ -1,25 +1,5 @@
 package be.vibes.ts;
 
-/*
- * #%L vibes-core %% Copyright (C) 2014 PReCISE, University of Namur %%
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- * 
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE. #L%
- */
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -67,18 +47,17 @@ public class TransitionSystemModelStatistics implements ModelStatistics {
 
     private final Map<String, Object> values;
 
-    
     private TransitionSystemModelStatistics() {
         this.values = new HashMap<>();
     }
-    
+
     /**
      * Computes statistics on the given TS.
      *
      * @param ts The TS on which computing statistics.
      * @return The statistics.
      */
-    public static TransitionSystemModelStatistics getStatistics(TransitionSystem ts){
+    public static TransitionSystemModelStatistics getStatistics(TransitionSystem ts) {
         TransitionSystemModelStatistics stats = new TransitionSystemModelStatistics();
         stats.put(NUMBER_OF_STATES, ts.getStatesCount());
         stats.put(NUMBER_OF_ACTIONS, ts.getActionsCount());
@@ -145,7 +124,7 @@ public class TransitionSystemModelStatistics implements ModelStatistics {
     /**
      * Returns the number of states in the model.
      *
-     * @return
+     * @return The number of states in the model.
      */
     public int getNumberOfState() {
         return (Integer) get(NUMBER_OF_STATES);
@@ -154,7 +133,7 @@ public class TransitionSystemModelStatistics implements ModelStatistics {
     /**
      * Returns the number of actions in the model.
      *
-     * @return
+     * @return The number of actions in the model.
      */
     public int getNumberOfActions() {
         return (Integer) get(NUMBER_OF_ACTIONS);
@@ -163,29 +142,39 @@ public class TransitionSystemModelStatistics implements ModelStatistics {
     /**
      * Returns the number of transitions in the model.
      *
-     * @return
+     * @return The number of transitions in the model.
      */
     public int getNumberOfTransitions() {
         return (Integer) get(NUMBER_OF_TRANSITIONS);
     }
 
+    /**
+     * Returns the average degree of the states.
+     *
+     * @return The average degree of the states.
+     */
     public double getAvgDegree() {
         return (Double) get(AVG_DEGREE);
     }
 
+    /**
+     * Returns the BFS height of the model.
+     *
+     * @return The BFS height of the model.
+     */
     public int getBfsHeight() {
         return (Integer) get(BFS_HEIGHT);
     }
 
+    /**
+     * Returns the number of back level transitions.
+     *
+     * @return The number of back level transitions.
+     */
     public int getNbBackLevelTransitions() {
         return (Integer) get(NB_BACK_LEVEL_TRANSITIONS);
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see be.unamur.transitionsystem.stat.ModelStatistics#getStatistics()
-     */
     @Override
     public String getStatistics() {
         StringBuilder builder = new StringBuilder();
