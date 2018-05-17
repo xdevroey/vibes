@@ -1,4 +1,4 @@
-package be.vibes.dsl.transforme;
+package be.vibes.dsl.io;
 
 import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.TransitionSystem;
@@ -10,11 +10,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 /**
- * Prints Models in PrintDot format. To be used with Graphviz tools.
+ * Prints Models in Dot format. To be used with Graphviz tools.
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class PrintDot {
+public class Dot {
 
     public static String format(FeaturedTransitionSystem fts) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();

@@ -173,28 +173,4 @@ public class XmlLoaders {
         return loadUsageModel(new File(xmlFile));
     }
 
-    public static TestSet loadTestSet(InputStream in, TransitionSystem ts) throws TransitionSystemDefinitionException {
-        TestCaseHandler handler = new TestCaseHandler(ts);
-        try {
-            XmlReader reader = new XmlReader(handler, in);
-            reader.readDocument();
-        } catch (XMLStreamException e) {
-            LOG.error("Error while reading TS input!", e);
-            throw new TransitionSystemDefinitionException("Error while reading TS!", e);
-        }
-        return handler.getTestSet();
-    }
-
-    public static TestSet loadTestSet(InputStream in, FeaturedTransitionSystem fts, FeatureModel fm) throws TransitionSystemDefinitionException {
-        FtsTestCaseHandler handler = new FtsTestCaseHandler(fts, fm);
-        try {
-            XmlReader reader = new XmlReader(handler, in);
-            reader.readDocument();
-        } catch (XMLStreamException e) {
-            LOG.error("Error while reading TS input!", e);
-            throw new TransitionSystemDefinitionException("Error while reading TS!", e);
-        }
-        return handler.getTestSet();
-    }
-
 }

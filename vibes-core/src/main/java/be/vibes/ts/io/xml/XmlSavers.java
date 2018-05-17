@@ -160,7 +160,7 @@ public class XmlSavers {
         
     public static void save(TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
         TestCasePrinter printer = new TestCasePrinter();
-        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        TestSetXmlPrinter xmlOut = new TestSetXmlPrinter(out, printer);
         try {
             xmlOut.print(set);
         } catch (XMLStreamException e) {
@@ -170,7 +170,7 @@ public class XmlSavers {
     
     public static void save(FeaturedTransitionSystem fts, TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
         FtsTestCasePrinter printer = new FtsTestCasePrinter(fts);
-        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        TestSetXmlPrinter xmlOut = new TestSetXmlPrinter(out, printer);
         try {
             xmlOut.print(set);
         } catch (XMLStreamException e) {
@@ -180,7 +180,7 @@ public class XmlSavers {
     
     public static void save(UsageModel um, TestSet set, OutputStream out) throws TransitionSystemDefinitionException {
         UsageModelTestCasePrinter printer = new UsageModelTestCasePrinter(um);
-        TestCaseXmlPrinter xmlOut = new TestCaseXmlPrinter(out, printer);
+        TestSetXmlPrinter xmlOut = new TestSetXmlPrinter(out, printer);
         try {
             xmlOut.print(set);
         } catch (XMLStreamException e) {

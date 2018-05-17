@@ -13,18 +13,18 @@ import javax.xml.stream.XMLStreamWriter;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class TestCaseXmlPrinter {
+public class TestSetXmlPrinter {
     
     protected OutputStream output;
     
     private TestCaseElementPrinter printer;
 
-    public TestCaseXmlPrinter(OutputStream output, TestCaseElementPrinter printer) {
+    public TestSetXmlPrinter(OutputStream output, TestCaseElementPrinter printer) {
         this.output = output;
         this.printer = printer;
     }
     
-    public TestCaseXmlPrinter(File output, TestCaseElementPrinter printer) throws FileNotFoundException {
+    public TestSetXmlPrinter(File output, TestCaseElementPrinter printer) throws FileNotFoundException {
         this(new FileOutputStream(output), printer);
     }
 
