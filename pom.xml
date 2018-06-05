@@ -62,7 +62,8 @@
         <jbool_expressions.version>1.15</jbool_expressions.version>
         <junit.version>4.12</junit.version>
         <!--<log4j.version>1.2.16</log4j.version>-->
-        <log4j2.version>2.11.0</log4j2.version>
+        <log4j2.version>2.9.1</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <mockito-core.version>2.18.3</mockito-core.version>
         <!--<mysql-connector-java.version>5.1.26</mysql-connector-java.version>-->
         <!--<named-regexp.version>0.2.3</named-regexp.version>-->

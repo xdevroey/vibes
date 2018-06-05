@@ -66,6 +66,7 @@ public class UsageDrivenRandomSelectorTest {
         List<TestCase> testcases = selector.select(10);
         assertThat(testcases, hasSize(10));
         for (TestCase tc : testcases) {
+            LOG.debug("Generated test case: {}", tc);
             assertThat("Initial state of the test case should be initial state of the transition system!", tc.getFirst().getSource(), equalTo(um.getInitialState()));
             assertThat("Final state of the test case should be initial state of the transition system!", tc.getLast().getTarget(), equalTo(um.getInitialState()));
         }

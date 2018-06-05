@@ -97,5 +97,10 @@ public class Execution implements Iterable<Transition> {
         }
         return copy;
     }
+
+    @Override
+    public String toString() {
+        return "Execution{" + "transitions=" + transitions + '}';
+    }
     
 }
