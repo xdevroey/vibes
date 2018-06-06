@@ -1,11 +1,9 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.transformation.dot.FtsDotPrinter;
-import be.unamur.transitionsystem.transformation.dot.LtsDotPrinter;
-import be.unamur.transitionsystem.transformation.dot.UsageModelDotPrinter;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
+import be.vibes.dsl.io.Dot;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -18,7 +16,7 @@ import org.apache.commons.cli.Option;
  */
 public class DOTTransformator implements Transformator {
 
-    private static final String OPTION_NAME = "dot";
+    public static final String OPTION_NAME = "dot";
 
     public static final DOTTransformator DOT = new DOTTransformator();
 
@@ -33,26 +31,23 @@ public class DOTTransformator implements Transformator {
     }
 
     @Override
-    public void transform(LabelledTransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+    public void transform(TransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
         PrintStream print = new PrintStream(out);
-        new LtsDotPrinter(print, lts)
-                .printDot();
+        print.print(Dot.format(lts));
         print.flush();
     }
 
     @Override
     public void transform(FeaturedTransitionSystem fts, OutputStream out, String... cmdArgs) throws IOException {
         PrintStream print = new PrintStream(out);
-        new FtsDotPrinter(print, fts)
-                .printDot();
+        print.print(Dot.format(fts));
         print.flush();
     }
 
     @Override
     public void transform(UsageModel um, OutputStream out, String... cmdArgs) throws IOException {
         PrintStream print = new PrintStream(out);
-        new UsageModelDotPrinter(print, um)
-                .printDot();
+        print.print(Dot.format(um));
         print.flush();
     }
 

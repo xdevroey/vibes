@@ -1,9 +1,8 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.transformation.aut.Lts2AutPrinter;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +41,9 @@ public class AldebaranTransformator implements Transformator {
     }
 
     @Override
-    public void transform(LabelledTransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+    public void transform(TransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+        throw new UnsupportedOperationException("ALDEBERAN not supported yet!");
+        /*
         PrintStream output = new PrintStream(out);
         Lts2AutPrinter printer = new Lts2AutPrinter(output, lts);
         printer.printAut();
@@ -59,6 +60,7 @@ public class AldebaranTransformator implements Transformator {
         } else {
             printer.printMapping(System.out);
         }
+*/
     }
 
     @Override

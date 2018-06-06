@@ -1,4 +1,4 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
 /*
  * #%L
@@ -25,6 +25,10 @@ package be.unamur.transitionsystem.transformation.main;
  * THE SOFTWARE.
  * #L%
  */
+import be.vibes.dsl.io.Xml;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -37,10 +41,6 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import static be.unamur.transitionsystem.dsl.TransitionSystemXmlLoaders.*;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
 import static com.google.common.base.Preconditions.*;
 import com.google.common.collect.Maps;
 import java.util.Map;
@@ -57,9 +57,9 @@ public class Main {
     private static final String USAGE_MODEL = "um";
     private static final String OUTPUT = "out";
 
-    private Options options;
+    private final Options options;
 
-    private Map<String, Transformator> transformators;
+    private final Map<String, Transformator> transformators;
 
     Main() {
         options = new Options();
@@ -72,7 +72,6 @@ public class Main {
         addOption(AldebaranTransformator.ALDEBARAN);
         addOption(BuchiAuromatonTransformator.BUCHI);
         addOption(DOTTransformator.DOT);
-        addOption(FPromelaTransformator.FPROMELA);
         addOption(SiberiaTransformator.SIBERIA);
         addOption(TimbukTransformator.TIMBUK);
         addOption(BFSHeightSlicerTransformator.BFS_SLICER);
@@ -103,9 +102,9 @@ public class Main {
         // Check if an input has been provided
         checkArgument(line.hasOption(LTS) || line.hasOption(FTS) || line.hasOption(USAGE_MODEL), "No input file provided (use '-help' to see usage)!");
         // Initialise input
-        FeaturedTransitionSystem fts = line.hasOption(FTS) ? loadFeaturedTransitionSystem(line.getOptionValue(FTS)) : null;
-        LabelledTransitionSystem lts = line.hasOption(LTS) ? loadLabelledTransitionSystem(line.getOptionValue(LTS)) : null;
-        UsageModel um = line.hasOption(USAGE_MODEL) ? loadUsageModel(line.getOptionValue(USAGE_MODEL)) : null;
+        FeaturedTransitionSystem fts = line.hasOption(FTS) ? Xml.loadFeaturedTransitionSystem(line.getOptionValue(FTS)) : null;
+        TransitionSystem lts = line.hasOption(LTS) ? Xml.loadTransitionSystem(line.getOptionValue(LTS)) : null;
+        UsageModel um = line.hasOption(USAGE_MODEL) ? Xml.loadUsageModel(line.getOptionValue(USAGE_MODEL)) : null;
         // Initialise output 
         PrintStream output;
         if (line.hasOption(OUTPUT)) {

@@ -46,7 +46,7 @@
         <!-- Dependencies versions -->
         <antlr.version>4.7.1</antlr.version>
         <!--<combinatoricslib.version>2.1</combinatoricslib.version>-->
-        <!--<commons-cli.version>1.3.1</commons-cli.version>-->
+        <commons-cli.version>1.4</commons-cli.version>
         <!--<commons-csv.version>1.5</commons-csv.version>-->
         <!--<commons-collections.version>3.2.1</commons-collections.version>-->
         <!--<commons-configuration.version>1.10</commons-configuration.version>-->
@@ -76,7 +76,7 @@
         <antlr4-maven-plugin.version>${antlr.version}</antlr4-maven-plugin.version>
         <build-helper-maven-plugin.version>1.12</build-helper-maven-plugin.version>
         <license-maven-plugin.version>1.16</license-maven-plugin.version>
-        <!--<maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>-->
+        <maven-assembly-plugin.version>3.1.0</maven-assembly-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <!--<maven-jaxb-plugin.version>1.3</maven-jaxb-plugin.version>-->
@@ -99,7 +99,7 @@
         <module>vibes-selection</module>
         <!--<module>vibes-transformation</module>-->
         <module>vibes-dsl</module>
-        <!--<module>vibes-toolbox</module>-->
+        <module>vibes-toolbox</module>
         <!--<module>vibes-example</module>-->
     </modules>
 

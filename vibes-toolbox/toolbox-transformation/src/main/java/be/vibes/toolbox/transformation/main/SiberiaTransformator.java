@@ -1,9 +1,8 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.transformation.siberia.LtsSiberiaPrinter;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -31,10 +30,13 @@ public class SiberiaTransformator implements Transformator {
     }
 
     @Override
-    public void transform(LabelledTransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+    public void transform(TransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+        throw new UnsupportedOperationException("Siberia automaton not supported yet");
+        /*
         PrintStream output = new PrintStream(out);
         new LtsSiberiaPrinter(output, lts).printLTSiberia();
         output.flush();
+        */
     }
 
     @Override

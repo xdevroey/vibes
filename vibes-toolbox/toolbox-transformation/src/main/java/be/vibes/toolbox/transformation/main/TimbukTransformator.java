@@ -1,12 +1,10 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
-import be.unamur.transitionsystem.Action;
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.State;
-import be.unamur.transitionsystem.dsl.TransitionSystemXmlLoaders;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.transformation.timbuk.LtsTimbukPrinter;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
+import be.vibes.ts.Action;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.State;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -65,7 +63,9 @@ public class TimbukTransformator implements Transformator {
     }
 
     @Override
-    public void transform(LabelledTransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+    public void transform(TransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException {
+        throw new UnsupportedOperationException("Timbuk Tree automaton not supported yet!");
+        /*
         PrintStream output = new PrintStream(out);
         LtsTimbukPrinter printer = new LtsTimbukPrinter(output, lts);
         // Get accepting states
@@ -96,7 +96,7 @@ public class TimbukTransformator implements Transformator {
         if (actions[0].equals(ALL_ARG_VALUE)) {
             alphabet = Sets.newHashSet(lts.actions());
         } else if (actions[0].endsWith(".lts") || actions[0].endsWith(".ts")) {
-            LabelledTransitionSystem actionsSrc = TransitionSystemXmlLoaders.loadLabelledTransitionSystem(actions[0]);
+            TransitionSystem actionsSrc = TransitionSystemXmlLoaders.loadTransitionSystem(actions[0]);
             alphabet = Sets.newHashSet(actionsSrc.actions());
         } else {
             alphabet = Sets.newHashSet();
@@ -128,6 +128,7 @@ public class TimbukTransformator implements Transformator {
             actionsMapping.flush();
         }
         output.flush();
+        */
     }
 
     @Override

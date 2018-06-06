@@ -1,8 +1,8 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
-import be.unamur.transitionsystem.LabelledTransitionSystem;
-import be.unamur.transitionsystem.fts.FeaturedTransitionSystem;
-import be.unamur.transitionsystem.usagemodel.UsageModel;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.UsageModel;
 import java.io.IOException;
 import java.io.OutputStream;
 import org.apache.commons.cli.Option;
@@ -29,8 +29,9 @@ public interface Transformator {
      * @param out The output stream to print the result of the transformation.
      * @param cmdArgs Additional arguments passed to the option in the command
      * line.
+     * @throws java.io.IOException If an error occurs while writing the results.
      */
-    public void transform(LabelledTransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException;
+    public void transform(TransitionSystem lts, OutputStream out, String... cmdArgs) throws IOException;
 
     /**
      * Triggers the transformation for the given FTS.
@@ -39,6 +40,7 @@ public interface Transformator {
      * @param out The output stream to print the result of the transformation.
      * @param cmdArgs Additional arguments passed to the option in the command
      * line.
+     * @throws java.io.IOException If an error occurs while writing the results.
      */
     public void transform(FeaturedTransitionSystem fts, OutputStream out, String... cmdArgs) throws IOException;
 
@@ -49,6 +51,7 @@ public interface Transformator {
      * @param out The output stream to print the result of the transformation.
      * @param cmdArgs Additional arguments passed to the option in the command
      * line.
+     * @throws java.io.IOException If an error occurs while writing the results.
      */
     public void transform(UsageModel um, OutputStream out, String... cmdArgs) throws IOException;
 

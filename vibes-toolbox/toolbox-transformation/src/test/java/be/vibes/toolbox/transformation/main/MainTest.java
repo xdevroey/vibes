@@ -1,9 +1,8 @@
-package be.unamur.transitionsystem.transformation.main;
+package be.vibes.toolbox.transformation.main;
 
 import java.io.File;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.rules.TestRule;
@@ -41,11 +40,10 @@ public class MainTest {
         output.delete();
         File mapping = testFolder.newFile();
         mapping.delete();
-        String[] args = new String[]{"-lts", input, "-out", output.getAbsolutePath(), "-" + AldebaranTransformator.OPTION_NAME, mapping.getAbsolutePath()};
+        String[] args = new String[]{"-lts", input, "-out", output.getAbsolutePath(), "-" + DOTTransformator.OPTION_NAME};
         Main main = new Main();
         main.execute(args);
         assertTrue("No output file generated!", output.exists());
-        assertTrue("No mapping file generated!", mapping.exists());
     }
 
 }

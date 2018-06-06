@@ -3,25 +3,23 @@
     <parent>
         <groupId>be.unamur.info</groupId>
         <artifactId>vibes</artifactId>
-        <version>1.1.6-SNAPSHOT</version>
+        <version>2.0.6-SNAPSHOT</version>
     </parent>
     <artifactId>vibes-toolbox</artifactId>
     <packaging>pom</packaging>
 
-    <name>VIBeS - Toolbox</name>
-    <description>
-        This module groups all the executables created using the VIBeS framework.
-    </description>
+    <name>VIBeS: toolbox</name>
+    
     <modules>
-        <module>toolbox-mutation-equivalence</module>
-        <module>toolbox-mutant-generation</module>
+        <!--<module>toolbox-mutation-equivalence</module>-->
+        <!--<module>toolbox-mutant-generation</module>-->
         <module>toolbox-transformation</module>
-        <module>toolbox-products-analyze</module>
-        <module>toolbox-testcase-generation</module>
-        <module>toolbox-fmm-execution</module>
-        <module>toolbox-model-statistics</module>
-        <module>toolbox-mutant-sampling</module>
-        <module>toolbox-wordpress-ts2fts</module>
-        <module>toolbox-determinism</module>
+        <!--<module>toolbox-products-analyze</module>-->
+        <!--<module>toolbox-testcase-generation</module>-->
+        <!--<module>toolbox-fmm-execution</module>-->
+        <!--<module>toolbox-model-statistics</module>-->
+        <!--<module>toolbox-mutant-sampling</module>-->
+        <!--<module>toolbox-wordpress-ts2fts</module>-->
+        <!--<module>toolbox-determinism</module>-->
     </modules>
 </project>
