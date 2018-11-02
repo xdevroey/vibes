@@ -1,5 +1,4 @@
 target/
-**/target/
 .DS_Store/
 .project/
 .settings/
@@ -7,3 +6,5 @@ target/
 **/.classpath
 **/nbproject/
 **/**/nbproject/
+.idea/
+*.iml
