@@ -1,6 +1,11 @@
 
 This project aims at providing a framework to perform behavioural testing of SPLs.
 
+![VIBeS Logo](logo-vibes.png)
+
+[![Build Status](https://travis-ci.org/xdevroey/vibes.svg?branch=master)](https://travis-ci.org/xdevroey/vibes)
+[![Coverage Status](https://coveralls.io/repos/github/xdevroey/vibes/badge.svg?branch=master)](https://coveralls.io/github/xdevroey/vibes?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/be.unamur.info/vibes/badge.svg)](https://maven-badges.herokuapp.com/maven-central/be.unamur.info/vibes/badge.svg)
 
 # Project structure
 
