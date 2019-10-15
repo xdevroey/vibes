@@ -17,7 +17,7 @@
         <!--<module>toolbox-products-analyze</module>-->
         <!--<module>toolbox-testcase-generation</module>-->
         <!--<module>toolbox-fmm-execution</module>-->
-        <!--<module>toolbox-model-statistics</module>-->
+        <module>toolbox-model-statistics</module>
         <!--<module>toolbox-mutant-sampling</module>-->
         <!--<module>toolbox-wordpress-ts2fts</module>-->
         <!--<module>toolbox-determinism</module>-->
