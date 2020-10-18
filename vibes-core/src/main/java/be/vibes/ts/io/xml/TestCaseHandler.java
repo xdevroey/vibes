@@ -20,11 +20,11 @@ package be.vibes.ts.io.xml;
  * #L%
  */
 
-import be.vibes.ts.Execution;
+import be.vibes.ts.execution.Execution;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.TransitionSystemExecutor;
+import be.vibes.ts.execution.TransitionSystemExecutor;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import com.google.common.base.Preconditions;
 import java.util.Iterator;

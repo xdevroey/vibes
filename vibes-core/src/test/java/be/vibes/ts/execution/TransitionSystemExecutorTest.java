@@ -1,4 +1,4 @@
-package be.vibes.ts;
+package be.vibes.ts.execution;
 
 /*-
  * #%L
@@ -20,6 +20,8 @@ package be.vibes.ts;
  * #L%
  */
 
+import be.vibes.ts.TransitionSystem;
+import be.vibes.ts.TransitionSystemFactory;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;

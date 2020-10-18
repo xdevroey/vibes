@@ -1,4 +1,4 @@
-package be.vibes.ts;
+package be.vibes.ts.execution;
 
 /*-
  * #%L
@@ -9,9 +9,9 @@ package be.vibes.ts;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,8 +20,10 @@ package be.vibes.ts;
  * #L%
  */
 
+import be.vibes.ts.Transition;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import com.google.common.base.Preconditions;
+
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
@@ -34,18 +36,18 @@ import java.util.Iterator;
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
 public class Execution implements Iterable<Transition> {
-    
+
     private final Deque<Transition> transitions;
-    
+
     public Execution() {
         this.transitions = new ArrayDeque<>();
     }
-    
+
     @Override
     public Iterator<Transition> iterator() {
         return this.transitions.iterator();
     }
-    
+
     public Execution enqueue(Transition transition) throws TransitionSystenExecutionException {
         if (transitions.isEmpty()) {
             transitions.add(transition);
@@ -60,34 +62,38 @@ public class Execution implements Iterable<Transition> {
         }
         return this;
     }
-    
+
     public Execution enqueueAll(Iterable<Transition> transitions) throws TransitionSystenExecutionException {
         for (Transition tr : transitions) {
             enqueue(tr);
         }
         return this;
     }
-    
+
     public Execution dequeue() {
         Preconditions.checkElementIndex(0, this.transitions.size(), "Execution is empty!");
         this.transitions.removeLast();
         return this;
     }
-    
-    public Transition getFirst(){
+
+    public Transition getFirst() {
         Preconditions.checkElementIndex(0, this.transitions.size(), "Execution is empty!");
         return this.transitions.getFirst();
     }
-    
-    public Transition getLast(){
+
+    public Transition getLast() {
         Preconditions.checkElementIndex(0, this.transitions.size(), "Execution is empty!");
         return this.transitions.getLast();
     }
-    
-    public int getSize(){
+
+    public int getSize() {
         return this.transitions.size();
     }
-    
+
+    public boolean isEmpty() {
+        return this.transitions.isEmpty();
+    }
+
     public Execution copy() {
         Execution copy = new Execution();
         try {
@@ -102,5 +108,5 @@ public class Execution implements Iterable<Transition> {
     public String toString() {
         return "Execution{" + "transitions=" + transitions + '}';
     }
-    
+
 }

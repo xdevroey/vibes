@@ -43,6 +43,8 @@ public interface TransitionSystem {
     public Iterator<Transition> transitions();
         
     public Iterator<Transition> getTransitions(State source, Action action, State target);
+
+    public Iterator<Transition> getTransitions(String source, String action, String target);
     
     public Iterator<Transition> getOutgoing(State source);
     

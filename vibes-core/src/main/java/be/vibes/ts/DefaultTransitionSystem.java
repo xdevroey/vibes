@@ -99,6 +99,14 @@ public class DefaultTransitionSystem implements TransitionSystem {
     }
 
     @Override
+    public Iterator<Transition> getTransitions(String sourceName, String actionName, String targetName) {
+        State source = states.get(sourceName);
+        Action action = actions.get(actionName);
+        State target = states.get(targetName);
+        return getTransitions(source, action, target);
+    }
+
+    @Override
     public Iterator<Transition> getOutgoing(State source) {
         return Iterables.concat(transitions.row(source).values()).iterator();
     }
@@ -194,7 +202,7 @@ public class DefaultTransitionSystem implements TransitionSystem {
 
     @Override
     public int getTransitionsCount() {
-        return transitions.size();
+        return allTransitions.size();
     }
 
     @Override

@@ -27,7 +27,7 @@ import be.vibes.solver.FeatureModel;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
 import be.vibes.ts.FeaturedTransitionSystem;
-import be.vibes.ts.FeaturedTransitionSystemExecutor;
+import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.State;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.Transition;

@@ -21,12 +21,13 @@ package be.vibes.ts;
  */
 
 import be.vibes.ts.exception.TransitionSystenExecutionException;
+import be.vibes.ts.execution.Execution;
 
 /**
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class TestCase extends Execution{
+public class TestCase extends Execution {
     
     private final String id;
 

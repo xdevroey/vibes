@@ -24,7 +24,7 @@ import be.vibes.dsl.exception.TestCaseDefinitionException;
 import be.vibes.dsl.exception.TransitionSystemIOException;
 import be.vibes.solver.FeatureModel;
 import be.vibes.ts.FeaturedTransitionSystem;
-import be.vibes.ts.FeaturedTransitionSystemExecutor;
+import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
 import be.vibes.ts.UsageModel;

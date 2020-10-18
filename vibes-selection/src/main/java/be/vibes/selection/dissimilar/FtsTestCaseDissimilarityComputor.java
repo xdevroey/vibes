@@ -33,7 +33,7 @@ import be.vibes.solver.exception.ConstraintNotFoundException;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
 import be.vibes.ts.FeaturedTransitionSystem;
-import be.vibes.ts.FeaturedTransitionSystemExecutor;
+import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.TestCase;
 import java.util.List;
 import java.util.Set;

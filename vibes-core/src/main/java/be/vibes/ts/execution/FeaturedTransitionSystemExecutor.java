@@ -1,4 +1,4 @@
-package be.vibes.ts;
+package be.vibes.ts.execution;
 
 /*-
  * #%L
@@ -27,6 +27,9 @@ import be.vibes.solver.SolverFatalErrorException;
 import be.vibes.solver.exception.ConstraintNotFoundException;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
+import be.vibes.ts.Action;
+import be.vibes.ts.FeaturedTransitionSystem;
+import be.vibes.ts.Transition;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,4 +115,14 @@ public class FeaturedTransitionSystemExecutor extends TransitionSystemExecutor {
         return (FeaturedTransitionSystem) super.getTransitionSystem();
     }
 
+    @Override
+    public void reset() throws TransitionSystenExecutionException {
+        super.reset();
+        try {
+            this.fm.reset();
+        } catch (SolverInitializationException e) {
+            LOG.error("Exception while resetting the feature model!", e);
+            throw new TransitionSystenExecutionException("Exception while resetting the feature model!", e);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package be.vibes.ts;
+package be.vibes.ts.execution;
 
 /*-
  * #%L
@@ -9,9 +9,9 @@ package be.vibes.ts;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,15 +20,18 @@ package be.vibes.ts;
  * #L%
  */
 
+import be.vibes.ts.*;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.google.common.base.Preconditions.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Allows to execute a TransitionSystem.
@@ -83,11 +86,11 @@ public class TransitionSystemExecutor {
      * executed.
      *
      * @param action The action to execute.
-     * @throws NullPointerException If the action name is null.
-     * @throws IllegalArgumentException If the action name does not corresponds
-     * to an action of the transition system.
+     * @throws NullPointerException               If the action name is null.
+     * @throws IllegalArgumentException           If the action name does not corresponds
+     *                                            to an action of the transition system.
      * @throws TransitionSystenExecutionException If the action cannot be
-     * executed.
+     *                                            executed.
      */
     public void execute(String action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
@@ -100,9 +103,8 @@ public class TransitionSystemExecutor {
      * TransitionSystenExecutionException if the action cannot be executed.
      *
      * @param action The action to execute.
-     * @throws NullPointerException If the action is null.
-     * @throws TransitionSystenExecutionException If the action cannot be
-     * executed.
+     * @throws NullPointerException               If the action is null.
+     * @throws TransitionSystenExecutionException If the action cannot be executed.
      */
     public void execute(Action action) throws TransitionSystenExecutionException {
         checkNotNull(action, "Action may not be null!");
@@ -114,6 +116,21 @@ public class TransitionSystemExecutor {
         }
         if (!executed) {
             throw new TransitionSystenExecutionException("Could not execute action " + action + " from executions " + Arrays.toString(this.executions.toArray()) + "!");
+        }
+    }
+
+    /**
+     * Executes the test case on the transition system or throws a TransitionSystenExecutionException if the test
+     * case cannot be executed.
+     *
+     * @param testCase The test case to execute.
+     * @throws NullPointerException               If the testCase or one of its actions are null.
+     * @throws TransitionSystenExecutionException If the test case cannot be executed.
+     */
+    public void execute(TestCase testCase) throws TransitionSystenExecutionException {
+        checkNotNull(testCase, "TestCase may not be null!");
+        for (Transition transition : testCase) {
+            execute(transition.getAction());
         }
     }
 
@@ -178,6 +195,15 @@ public class TransitionSystemExecutor {
 
     protected TransitionSystem getTransitionSystem() {
         return ts;
+    }
+
+    /**
+     * Resets the status of the executor and clears the previous executionss
+     *
+     * @throws TransitionSystenExecutionException If an error happens during the re-initialisation of the executor.
+     */
+    public void reset() throws TransitionSystenExecutionException {
+        this.executions.clear();
     }
 
 }

@@ -23,7 +23,7 @@ package be.vibes.dsl.transforme;
 import be.vibes.dsl.exception.TransformationException;
 import be.vibes.dsl.execution.Execute;
 import be.vibes.solver.FeatureModel;
-import be.vibes.ts.Execution;
+import be.vibes.ts.execution.Execution;
 import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.FeaturedTransitionSystemFactory;
 import be.vibes.ts.TestCase;

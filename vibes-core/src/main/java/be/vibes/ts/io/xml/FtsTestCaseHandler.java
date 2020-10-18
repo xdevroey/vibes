@@ -22,8 +22,7 @@ package be.vibes.ts.io.xml;
 
 import be.vibes.solver.FeatureModel;
 import be.vibes.ts.FeaturedTransitionSystem;
-import be.vibes.ts.FeaturedTransitionSystemExecutor;
-import static be.vibes.ts.io.xml.TestCaseHandler.ID_ATTR;
+import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import com.google.common.base.Preconditions;
 import javax.xml.namespace.QName;
 import javax.xml.stream.events.StartElement;

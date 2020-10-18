@@ -23,7 +23,6 @@ package be.vibes.selection.random;
 
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.TransitionSystemExecutor;
 import be.vibes.ts.io.xml.XmlLoaders;
 import java.io.InputStream;
 import java.util.List;

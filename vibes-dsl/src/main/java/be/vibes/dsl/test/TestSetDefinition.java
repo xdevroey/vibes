@@ -22,13 +22,13 @@ package be.vibes.dsl.test;
 
 import be.vibes.dsl.exception.TestCaseDefinitionException;
 import be.vibes.solver.FeatureModel;
-import be.vibes.ts.Execution;
+import be.vibes.ts.execution.Execution;
 import be.vibes.ts.FeaturedTransitionSystem;
-import be.vibes.ts.FeaturedTransitionSystemExecutor;
+import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.TransitionSystemExecutor;
+import be.vibes.ts.execution.TransitionSystemExecutor;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import java.util.Iterator;
 import org.slf4j.Logger;
