@@ -17,7 +17,7 @@ import java.util.*;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class TransitionPairCoverage extends StructuralCoverage<List<Transition>> {
+public class TransitionPairCoverage extends StructuralCoverage<TransitionPair> {
 
     /**
      * Create a new transition pair coverage criteria for the given transition system.
@@ -39,14 +39,12 @@ public class TransitionPairCoverage extends StructuralCoverage<List<Transition>>
     }
 
     @Override
-    public Iterator<List<Transition>> getElementsToBeCovered() {
-        Set<List<Transition>> toBeCovered = new HashSet<>();
+    public Iterator<TransitionPair> getElementsToBeCovered() {
+        Set<TransitionPair> toBeCovered = new HashSet<>();
         getTs().states().forEachRemaining((state) ->{
             getTs().getIncoming(state).forEachRemaining((incoming)->{
                 getTs().getOutgoing(state).forEachRemaining((outgoing) ->{
-                    List<Transition> pair = new ArrayList(2);
-                    pair.add(incoming);
-                    pair.add(outgoing);
+                    TransitionPair pair = new TransitionPair(incoming, outgoing);
                     toBeCovered.add(pair);
                 });
             });
@@ -55,18 +53,16 @@ public class TransitionPairCoverage extends StructuralCoverage<List<Transition>>
     }
 
     @Override
-    protected Set<List<Transition>> getCoveredElements(Execution execution) {
-        Set<List<Transition>> covered = new HashSet<>();
+    protected Set<TransitionPair> getCoveredElements(Execution execution) {
+        Set<TransitionPair> covered = new HashSet<>();
         if(!execution.isEmpty()){
             Iterator<Transition> transitions = execution.iterator();
             Transition first = transitions.next();
             Transition second;
-            List<Transition> pair;
+            TransitionPair pair;
             while(transitions.hasNext()){
                 second = transitions.next();
-                pair = new ArrayList<>(2);
-                pair.add(first);
-                pair.add(second);
+                pair = new TransitionPair(first, second);
                 covered.add(pair);
                 first = second;
             }
