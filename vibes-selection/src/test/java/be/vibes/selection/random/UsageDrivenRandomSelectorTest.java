@@ -26,7 +26,7 @@ import be.vibes.ts.io.xml.XmlLoaders;
 import java.io.InputStream;
 import java.util.List;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Rule;
 import org.junit.rules.TestRule;

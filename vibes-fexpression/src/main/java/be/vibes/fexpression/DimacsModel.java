@@ -118,7 +118,7 @@ public class DimacsModel {
         int[] clause;
         dimacsFD = Lists.newArrayList();
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
-                .split(Files.toString(dimacs, Charsets.UTF_8))) {
+                .split(Files.asCharSource(dimacs, Charsets.UTF_8).read())) {
             LOG.trace("line = " + line);
             tabLine = line.split(" ");
             if (tabLine.length == 0 || tabLine[0].equals("p")) {
@@ -149,7 +149,7 @@ public class DimacsModel {
         featureMapping = HashBiMap.create();
         String[] tabLine;
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
-                .split(Files.toString(mapping, Charsets.UTF_8))) {
+                .split(Files.asCharSource(mapping, Charsets.UTF_8).read())) {
             LOG.trace("line = " + line);
             tabLine = line.split(" ");
             if (tabLine.length >= 1 || tabLine.length <= 2) {
@@ -167,7 +167,7 @@ public class DimacsModel {
             int nbrClauses = 0;
             int[] clause;
             for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
-                    .split(Files.toString(dimacs, Charsets.UTF_8))) {
+                    .split(Files.asCharSource(dimacs, Charsets.UTF_8).read())) {
                 LOG.trace("line = " + line);
                 tabLine = line.split(" ");
                 LOG.trace("tabLine = {}", Arrays.toString(tabLine));

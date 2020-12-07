@@ -22,7 +22,7 @@ package be.vibes.ts;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 import org.junit.Rule;

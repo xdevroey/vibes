@@ -7,7 +7,7 @@ cache:
     - $HOME/.m2
 
 jdk:
-  - openjdk8
+  - openjdk15
 
 after_success:
   - mvn jacoco:report coveralls:report

@@ -99,11 +99,11 @@ public class BDDSolverFacade implements FeatureModel {
         }
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        this.factory.done();
-        super.finalize();
-    }
+//    @Override
+//    protected void finalize() throws Throwable {
+//        this.factory.done();
+//        super.finalize();
+//    }
 
     @Override
     public ConstraintIdentifier addConstraint(FExpression constraint)

@@ -22,7 +22,7 @@ package be.vibes.selection.dissimilar;
 
 import java.util.List;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static be.vibes.selection.dissimilar.TestUtils.*;
 import org.junit.Rule;
