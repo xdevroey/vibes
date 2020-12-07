@@ -45,20 +45,20 @@ public class TransitionPairCoverageTest {
         factory.addTransition("s3", "a0", "s0");
         TransitionSystem ts = factory.build();
         TransitionPairCoverage coverage = new TransitionPairCoverage(ts);
-        List<List<Transition>> toBeCovered = Lists.newArrayList(coverage.getElementsToBeCovered());
+        List<TransitionPair> toBeCovered = Lists.newArrayList(coverage.getElementsToBeCovered());
         assertThat(toBeCovered, containsInAnyOrder(
                 // s0 pairs
-                Lists.newArrayList(ts.getTransitions("s3", "a0", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
-                Lists.newArrayList(ts.getTransitions("s2", "a0", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
-                Lists.newArrayList(ts.getTransitions("s1", "a3", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
+                new TransitionPair(ts.getTransitions("s3", "a0", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
+                new TransitionPair(ts.getTransitions("s2", "a0", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
+                new TransitionPair(ts.getTransitions("s1", "a3", "s0").next(), ts.getTransitions("s0", "a1", "s1").next()),
                 // s1 pairs
-                Lists.newArrayList(ts.getTransitions("s0", "a1", "s1").next(), ts.getTransitions("s1", "a2", "s2").next()),
-                Lists.newArrayList(ts.getTransitions("s0", "a1", "s1").next(), ts.getTransitions("s1", "a3", "s0").next()),
+                new TransitionPair(ts.getTransitions("s0", "a1", "s1").next(), ts.getTransitions("s1", "a2", "s2").next()),
+                new TransitionPair(ts.getTransitions("s0", "a1", "s1").next(), ts.getTransitions("s1", "a3", "s0").next()),
                 // s2 pairs
-                Lists.newArrayList(ts.getTransitions("s1", "a2", "s2").next(), ts.getTransitions("s2", "a0", "s0").next()),
-                Lists.newArrayList(ts.getTransitions("s1", "a2", "s2").next(), ts.getTransitions("s2", "a2", "s3").next()),
+                new TransitionPair(ts.getTransitions("s1", "a2", "s2").next(), ts.getTransitions("s2", "a0", "s0").next()),
+                new TransitionPair(ts.getTransitions("s1", "a2", "s2").next(), ts.getTransitions("s2", "a2", "s3").next()),
                 // s3 pairs
-                Lists.newArrayList(ts.getTransitions("s2", "a2", "s3").next(), ts.getTransitions("s3", "a0", "s0").next())
+                new TransitionPair(ts.getTransitions("s2", "a2", "s3").next(), ts.getTransitions("s3", "a0", "s0").next())
         ));
     }
 
