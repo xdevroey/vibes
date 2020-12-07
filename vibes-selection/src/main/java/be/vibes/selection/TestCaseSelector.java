@@ -30,9 +30,9 @@ import java.util.List;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public interface TestCaseSelector {
+public interface TestCaseSelector<T extends TransitionSystem> {
     
-    public TransitionSystem getTransitionSystem();
+    public T getTransitionSystem();
     
     public List<TestCase> select(int nbr) throws TestCaseSelectionException;
     

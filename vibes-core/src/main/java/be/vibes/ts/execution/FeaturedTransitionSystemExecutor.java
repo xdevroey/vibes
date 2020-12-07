@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class FeaturedTransitionSystemExecutor extends TransitionSystemExecutor {
+public class FeaturedTransitionSystemExecutor extends Executor<FeaturedTransitionSystem> {
 
     private static final Logger LOG = LoggerFactory.getLogger(FeaturedTransitionSystemExecutor.class);
 

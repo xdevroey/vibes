@@ -47,13 +47,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class LocalRandomTestCaseSelector extends RandomTestCaseSelector {
+public class LocalRandomSelectionFromTS extends RandomSelection<TransitionSystem> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocalRandomTestCaseSelector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocalRandomSelectionFromTS.class);
 
     private State[] localStates;
 
-    public LocalRandomTestCaseSelector(TransitionSystem transitionSystem, int maxNbrTry, int maxLength, Set<State> localStates) {
+    public LocalRandomSelectionFromTS(TransitionSystem transitionSystem, int maxNbrTry, int maxLength, Set<State> localStates) {
         super(transitionSystem, maxNbrTry, maxLength);
         checkNotNull(localStates, "Parameter localStates may not be null!");
         this.localStates = localStates.stream().filter(s -> transitionSystem.getState(s.getName()) != null).toArray(State[]::new);
@@ -71,11 +71,11 @@ public class LocalRandomTestCaseSelector extends RandomTestCaseSelector {
         }
     }
 
-    public LocalRandomTestCaseSelector(TransitionSystem transitionSystem, Set<State> localStates) {
+    public LocalRandomSelectionFromTS(TransitionSystem transitionSystem, Set<State> localStates) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH, localStates);
     }
     
-    public LocalRandomTestCaseSelector(TransitionSystem transitionSystem, int maxLength, Set<State> localStates) {
+    public LocalRandomSelectionFromTS(TransitionSystem transitionSystem, int maxLength, Set<State> localStates) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, maxLength, localStates);
     }
 

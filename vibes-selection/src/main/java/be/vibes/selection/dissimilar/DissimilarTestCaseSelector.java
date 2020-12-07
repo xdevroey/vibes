@@ -21,7 +21,7 @@ package be.vibes.selection.dissimilar;
  */
 
 import be.vibes.selection.AbstractTestCaseSelector;
-import be.vibes.selection.random.RandomTestCaseSelector;
+import be.vibes.selection.random.RandomSelection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +79,7 @@ public class DissimilarTestCaseSelector extends AbstractTestCaseSelector {
     @Override
     public List<TestCase> select(int nbr) throws TestCaseSelectionException {
         DissimilarTestSet set;
-        RandomTestCaseSelector gen = getRandomTestCaseSelector();
+        RandomSelection gen = getRandomTestCaseSelector();
         try {
             LOG.debug("Generating initial population");
             set = new DissimilarTestSet(gen.select(nbr), prioritization);
@@ -112,8 +112,8 @@ public class DissimilarTestCaseSelector extends AbstractTestCaseSelector {
         return Lists.newArrayList(set);
     }
 
-    protected RandomTestCaseSelector getRandomTestCaseSelector() {
-        return new RandomTestCaseSelector(getTransitionSystem());
+    protected RandomSelection getRandomTestCaseSelector() {
+        return new RandomSelection(getTransitionSystem());
     }
 
 }

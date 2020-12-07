@@ -39,9 +39,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class UsageDrivenRandomSelectorTest {
+public class RandomSelectionFromUsageModelTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UsageDrivenRandomSelectorTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomSelectionFromUsageModelTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -60,7 +60,7 @@ public class UsageDrivenRandomSelectorTest {
                 .getResourceAsStream("um-sodaVendingMachine.xml");
         UsageModel um = XmlLoaders.loadUsageModel(input);
         assertThat(um, notNullValue());
-        UsageDrivenRandomSelector selector = new UsageDrivenRandomSelector(um, 34, 42);
+        RandomSelectionFromUsageModel selector = new RandomSelectionFromUsageModel(um, 34, 42);
         assertThat(selector.getMaxLength(), equalTo(42));
         assertThat(selector.getMaxNbrAttempts(), equalTo(34));
         List<TestCase> testcases = selector.select(10);
@@ -79,7 +79,7 @@ public class UsageDrivenRandomSelectorTest {
                 .getResourceAsStream("um-singlepath.xml");
         UsageModel um = XmlLoaders.loadUsageModel(input);
         assertThat(um, notNullValue());
-        UsageDrivenRandomSelector selector = new UsageDrivenRandomSelector(um, 34, 42);
+        RandomSelectionFromUsageModel selector = new RandomSelectionFromUsageModel(um, 34, 42);
         assertThat(selector.getMaxLength(), equalTo(42));
         assertThat(selector.getMaxNbrAttempts(), equalTo(34));
         List<TestCase> testcases = selector.select(10);

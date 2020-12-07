@@ -28,7 +28,7 @@ import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.execution.TransitionSystemExecutor;
+import be.vibes.ts.execution.Executor;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import java.util.Iterator;
 import org.slf4j.Logger;
@@ -59,7 +59,7 @@ public abstract class TestSetDefinition {
 
     void notifyTestCaseDefinitionComplete(TestCaseDefinition def) {
         TestCase testCase = new TestCase(def.getId());
-        TransitionSystemExecutor exec = fm == null ? new TransitionSystemExecutor(ts)
+        Executor exec = fm == null ? new Executor(ts)
                 : new FeaturedTransitionSystemExecutor((FeaturedTransitionSystem) ts, fm);
         def.actions().forEach((str) -> {
             try {

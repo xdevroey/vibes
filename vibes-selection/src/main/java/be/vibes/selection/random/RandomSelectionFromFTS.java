@@ -41,24 +41,24 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class FtsRandomTestCaseSelector extends RandomTestCaseSelector {
+public class RandomSelectionFromFTS extends RandomSelection<FeaturedTransitionSystem> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(FtsRandomTestCaseSelector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomSelectionFromFTS.class);
 
     private final FeatureModel fm;
     private final FeaturedTransitionSystemExecutor exec;
 
-    public FtsRandomTestCaseSelector(FeaturedTransitionSystem fts, FeatureModel fm, int maxNbrTry, int maxLength) {
+    public RandomSelectionFromFTS(FeaturedTransitionSystem fts, FeatureModel fm, int maxNbrTry, int maxLength) {
         super(fts, maxNbrTry, maxLength);
         this.fm = fm;
         this.exec = new FeaturedTransitionSystemExecutor(fts, fm);
     }
 
-    public FtsRandomTestCaseSelector(FeaturedTransitionSystem fts, FeatureModel fm) {
+    public RandomSelectionFromFTS(FeaturedTransitionSystem fts, FeatureModel fm) {
         this(fts, fm, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH);
     }
     
-    public FtsRandomTestCaseSelector(FeaturedTransitionSystem fts, FeatureModel fm, int maxLength) {
+    public RandomSelectionFromFTS(FeaturedTransitionSystem fts, FeatureModel fm, int maxLength) {
         this(fts, fm, DEFAULT_MAX_NUMBER_TRY, maxLength);
     }
 
@@ -98,11 +98,6 @@ public class FtsRandomTestCaseSelector extends RandomTestCaseSelector {
         } else {
             return outgoings.get(this.random.nextInt(outgoings.size()));
         }
-    }
-
-    @Override
-    public FeaturedTransitionSystem getTransitionSystem() {
-        return (FeaturedTransitionSystem) super.getTransitionSystem();
     }
 
 }

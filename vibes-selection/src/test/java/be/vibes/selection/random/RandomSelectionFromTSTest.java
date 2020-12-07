@@ -40,9 +40,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class RandomTestCaseSelectorTest {
+public class RandomSelectionFromTSTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RandomTestCaseSelectorTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomSelectionFromTSTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -60,7 +60,7 @@ public class RandomTestCaseSelectorTest {
                 .getResourceAsStream("ts-sodaVendingMachine.xml");
         TransitionSystem ts = XmlLoaders.loadTransitionSystem(input);
         assertThat(ts, notNullValue());
-        RandomTestCaseSelector selector = new RandomTestCaseSelector(ts, 34, 42);
+        RandomSelectionFromTS selector = new RandomSelectionFromTS(ts, 34, 42);
         assertThat(selector.getMaxLength(), equalTo(42));
         assertThat(selector.getMaxNbrAttempts(), equalTo(34));
         List<TestCase> testcases = selector.select(10);

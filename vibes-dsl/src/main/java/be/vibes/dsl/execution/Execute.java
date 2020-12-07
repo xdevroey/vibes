@@ -28,7 +28,7 @@ import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.execution.TransitionSystemExecutor;
+import be.vibes.ts.execution.Executor;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class Execute {
      * transitions fired when executing the test case on the transition system.
      */
     public static List<Execution> execute(TransitionSystem ts, List<Action> actions) {
-        TransitionSystemExecutor exec = new TransitionSystemExecutor(ts);
+        Executor exec = new Executor(ts);
         actions.forEach((action) -> {
             try {
                 exec.execute(action);
@@ -98,7 +98,7 @@ public class Execute {
      * transitions fired when executing the test case on the transition system.
      */
     public static List<Execution> execute(FeaturedTransitionSystem fts, FeatureModel fm, List<Action> actions) {
-        TransitionSystemExecutor exec = new FeaturedTransitionSystemExecutor(fts, fm);
+        Executor exec = new FeaturedTransitionSystemExecutor(fts, fm);
         actions.forEach((action) -> {
             try {
                 exec.execute(action);

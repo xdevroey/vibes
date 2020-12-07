@@ -36,23 +36,18 @@ import java.util.List;
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
  */
-public class UsageDrivenRandomSelector extends RandomTestCaseSelector {
+public class RandomSelectionFromUsageModel extends RandomSelection<UsageModel> {
 
-    public UsageDrivenRandomSelector(UsageModel um, int maxNbrTry, int maxLength) {
+    public RandomSelectionFromUsageModel(UsageModel um, int maxNbrTry, int maxLength) {
         super(um, maxNbrTry, maxLength);
     }
 
-    public UsageDrivenRandomSelector(UsageModel um) {
+    public RandomSelectionFromUsageModel(UsageModel um) {
         super(um);
     }
 
-    public UsageDrivenRandomSelector(UsageModel um, int maxLength) {
+    public RandomSelectionFromUsageModel(UsageModel um, int maxLength) {
         super(um, maxLength);
-    }
-
-    @Override
-    public UsageModel getTransitionSystem() {
-        return (UsageModel) super.getTransitionSystem();
     }
 
     @Override
@@ -84,7 +79,7 @@ public class UsageDrivenRandomSelector extends RandomTestCaseSelector {
             maxProba = maxProba + um.getProbability(tr);
             elemIdx++;
         }
-        // Return the designated element 
+        // Return the designated element
         return outgoings.get(elemIdx);
     }
 

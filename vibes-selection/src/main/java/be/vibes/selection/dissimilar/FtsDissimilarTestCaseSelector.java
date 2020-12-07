@@ -20,8 +20,8 @@ package be.vibes.selection.dissimilar;
  * #L%
  */
 
-import be.vibes.selection.random.FtsRandomTestCaseSelector;
-import be.vibes.selection.random.RandomTestCaseSelector;
+import be.vibes.selection.random.RandomSelectionFromFTS;
+import be.vibes.selection.random.RandomSelection;
 import be.vibes.solver.FeatureModel;
 import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.TransitionSystem;
@@ -53,8 +53,8 @@ public class FtsDissimilarTestCaseSelector extends DissimilarTestCaseSelector{
     }
 
     @Override
-    protected RandomTestCaseSelector getRandomTestCaseSelector() {
-        return new FtsRandomTestCaseSelector(getTransitionSystem(), this.fm);
+    protected RandomSelection getRandomTestCaseSelector() {
+        return new RandomSelectionFromFTS(getTransitionSystem(), this.fm);
     }
     
 }

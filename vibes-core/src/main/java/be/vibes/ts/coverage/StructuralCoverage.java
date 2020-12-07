@@ -6,7 +6,7 @@ import be.vibes.ts.exception.CoverageComputationException;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import be.vibes.ts.execution.Execution;
 import be.vibes.ts.execution.FeaturedTransitionSystemExecutor;
-import be.vibes.ts.execution.TransitionSystemExecutor;
+import be.vibes.ts.execution.Executor;
 import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public abstract class StructuralCoverage<T> implements CoverageCriteria {
     private static final Logger LOG = LoggerFactory.getLogger(StructuralCoverage.class);
 
     private TransitionSystem ts;
-    private TransitionSystemExecutor executor;
+    private Executor executor;
     private Set<T> elementsToCover;
 
     /**
@@ -37,7 +37,7 @@ public abstract class StructuralCoverage<T> implements CoverageCriteria {
      */
     public StructuralCoverage(TransitionSystem ts) {
         this.ts = ts;
-        this.executor = new TransitionSystemExecutor(ts);
+        this.executor = new Executor(ts);
         this.elementsToCover = Sets.newHashSet(getElementsToBeCovered());
     }
 

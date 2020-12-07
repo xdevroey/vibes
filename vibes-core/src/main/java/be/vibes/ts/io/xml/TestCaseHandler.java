@@ -24,7 +24,7 @@ import be.vibes.ts.execution.Execution;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.TestSet;
 import be.vibes.ts.TransitionSystem;
-import be.vibes.ts.execution.TransitionSystemExecutor;
+import be.vibes.ts.execution.Executor;
 import be.vibes.ts.exception.TransitionSystenExecutionException;
 import com.google.common.base.Preconditions;
 import java.util.Iterator;
@@ -54,7 +54,7 @@ public class TestCaseHandler implements XmlEventHandler {
     
     private TestSet testSet;
     protected String id;
-    protected TransitionSystemExecutor currentExecutor;
+    protected Executor currentExecutor;
     
     protected final TransitionSystem ts;
     
@@ -104,7 +104,7 @@ public class TestCaseHandler implements XmlEventHandler {
         LOG.trace("Starting test case");
         id = element.getAttributeByName(QName.valueOf(ID_ATTR)).getValue();
         Preconditions.checkNotNull(id, "Test case identifier may not be null!");
-        currentExecutor = new TransitionSystemExecutor(ts);
+        currentExecutor = new Executor(ts);
     }
     
     protected void handleStartTransitionTag(StartElement element) throws XMLStreamException {

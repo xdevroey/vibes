@@ -27,18 +27,17 @@ import be.vibes.ts.TransitionSystem;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public abstract class AbstractTestCaseSelector implements TestCaseSelector {
+public abstract class AbstractTestCaseSelector<T extends TransitionSystem> implements TestCaseSelector<T> {
     
-    private final TransitionSystem transitionSystem;
-   
-    
-    public AbstractTestCaseSelector(TransitionSystem transitionSystem){
+    private final T transitionSystem;
+
+    public AbstractTestCaseSelector(T transitionSystem){
         this.transitionSystem = transitionSystem;
     }
 
     @Override
-    public TransitionSystem getTransitionSystem() {
-        return transitionSystem;
+    public T getTransitionSystem() {
+        return this.transitionSystem;
     }
     
 }

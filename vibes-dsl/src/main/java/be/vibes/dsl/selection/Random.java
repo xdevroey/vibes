@@ -22,10 +22,10 @@ package be.vibes.dsl.selection;
 
 import be.vibes.dsl.exception.TestCaseDefinitionException;
 import be.vibes.selection.exception.TestCaseSelectionException;
-import be.vibes.selection.random.FtsRandomTestCaseSelector;
-import be.vibes.selection.random.LocalRandomTestCaseSelector;
-import be.vibes.selection.random.RandomTestCaseSelector;
-import be.vibes.selection.random.UsageDrivenRandomSelector;
+import be.vibes.selection.random.RandomSelectionFromFTS;
+import be.vibes.selection.random.LocalRandomSelectionFromTS;
+import be.vibes.selection.random.RandomSelection;
+import be.vibes.selection.random.RandomSelectionFromUsageModel;
 import be.vibes.solver.FeatureModel;
 import be.vibes.ts.*;
 
@@ -58,7 +58,7 @@ public class Random {
      * @return A set of random test cases with a maximal length of RandomTestCaseSelector.DEFAULT_MAX_LENGTH.
      */
     public static TestSet randomSelection(TransitionSystem ts, int nbrTestCases) {
-        return randomSelection(ts, nbrTestCases, RandomTestCaseSelector.DEFAULT_MAX_LENGTH);
+        return randomSelection(ts, nbrTestCases, RandomSelection.DEFAULT_MAX_LENGTH);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Random {
      * @return A set of random test cases.
      */
     public static TestSet randomSelection(TransitionSystem ts, int nbrTestCases, int testCaseMaxLength) {
-        RandomTestCaseSelector selector = new RandomTestCaseSelector(ts, testCaseMaxLength);
+        RandomSelection selector = new RandomSelection(ts, testCaseMaxLength);
         try {
             return new TestSet(selector.select(nbrTestCases));
         } catch (TestCaseSelectionException e) {
@@ -103,7 +103,7 @@ public class Random {
      * @return A set of random test cases with a maximal length of RandomTestCaseSelector.DEFAULT_MAX_LENGTH.
      */
     public static TestSet randomSelection(FeaturedTransitionSystem fts, FeatureModel fm, int nbrTestCases) {
-        return randomSelection(fts, fm, nbrTestCases, RandomTestCaseSelector.DEFAULT_MAX_LENGTH);
+        return randomSelection(fts, fm, nbrTestCases, RandomSelection.DEFAULT_MAX_LENGTH);
     }
 
     /**
@@ -116,7 +116,7 @@ public class Random {
      * @return A set of random test cases.
      */
     public static TestSet randomSelection(FeaturedTransitionSystem fts, FeatureModel fm, int nbrTestCases, int testCaseMaxLength) {
-        FtsRandomTestCaseSelector selector = new FtsRandomTestCaseSelector(fts, fm, testCaseMaxLength);
+        RandomSelectionFromFTS selector = new RandomSelectionFromFTS(fts, fm, testCaseMaxLength);
         try {
             return new TestSet(selector.select(nbrTestCases));
         } catch (TestCaseSelectionException e) {
@@ -149,7 +149,7 @@ public class Random {
      * @return A set of random test cases with a maximal length of RandomTestCaseSelector.DEFAULT_MAX_LENGTH.
      */
     public static TestSet randomSelection(UsageModel um, int nbrTestCases) {
-        return randomSelection(um, nbrTestCases, RandomTestCaseSelector.DEFAULT_MAX_LENGTH);
+        return randomSelection(um, nbrTestCases, RandomSelection.DEFAULT_MAX_LENGTH);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Random {
      * @return A test set with random test cases passing by the given states.
      */
     public static TestSet randomSelection(UsageModel um, int nbrTestCases, int testCaseMaxLength) {
-        UsageDrivenRandomSelector selector = new UsageDrivenRandomSelector(um, testCaseMaxLength);
+        RandomSelectionFromUsageModel selector = new RandomSelectionFromUsageModel(um, testCaseMaxLength);
         try {
             return new TestSet(selector.select(nbrTestCases));
         } catch (TestCaseSelectionException e) {
@@ -198,7 +198,7 @@ public class Random {
      * RandomTestCaseSelector.DEFAULT_MAX_LENGTH passing by the given states.
      */
     public static TestSet localRandomSelection(TransitionSystem ts, Set<State> states, int nbrTestCases) {
-        return localRandomSelection(ts, states, nbrTestCases, RandomTestCaseSelector.DEFAULT_MAX_LENGTH);
+        return localRandomSelection(ts, states, nbrTestCases, RandomSelection.DEFAULT_MAX_LENGTH);
     }
 
     /**
@@ -212,7 +212,7 @@ public class Random {
      * @return A test set with random test cases passing by the given states.
      */
     public static TestSet localRandomSelection(TransitionSystem ts, Set<State> states, int nbrTestCases, int testCaseMaxLength) {
-        LocalRandomTestCaseSelector selector = new LocalRandomTestCaseSelector(ts, testCaseMaxLength, states);
+        LocalRandomSelectionFromTS selector = new LocalRandomSelectionFromTS(ts, testCaseMaxLength, states);
         try {
             return new TestSet(selector.select(nbrTestCases));
         } catch (TestCaseSelectionException e) {

@@ -40,9 +40,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class RandomTestCaseSelector extends AbstractTestCaseSelector {
+public class RandomSelection<T extends TransitionSystem> extends AbstractTestCaseSelector<T> {
 
-    private static final Logger LOG = LoggerFactory.getLogger(RandomTestCaseSelector.class);
+    private static final Logger LOG = LoggerFactory.getLogger(RandomSelection.class);
 
     public static final int DEFAULT_MAX_NUMBER_TRY = 1000;
     public static final int DEFAULT_MAX_LENGTH = 2000;
@@ -53,18 +53,18 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
 
     protected int id = 0;
 
-    public RandomTestCaseSelector(TransitionSystem transitionSystem, int maxNbrTry, int maxLength) {
+    public RandomSelection(T transitionSystem, int maxNbrTry, int maxLength) {
         super(transitionSystem);
         this.maxNbrAttempts = maxNbrTry;
         this.maxLength = maxLength;
         this.random = new Random();
     }
 
-    public RandomTestCaseSelector(TransitionSystem transitionSystem) {
+    public RandomSelection(T transitionSystem) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, DEFAULT_MAX_LENGTH);
     }
  
-    public RandomTestCaseSelector(TransitionSystem transitionSystem,int maxLength) {
+    public RandomSelection(T transitionSystem, int maxLength) {
         this(transitionSystem, DEFAULT_MAX_NUMBER_TRY, maxLength);
     }
 
@@ -107,7 +107,7 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
     }
 
     private TestCase trySelect() throws SinkStateReachedException {
-        TransitionSystem ts = getTransitionSystem();
+        T ts = getTransitionSystem();
         TestCase tc = new TestCase("random" + (this.id++));
         Transition tr = getRandomTransition(null);
         State last;
@@ -136,7 +136,7 @@ public class RandomTestCaseSelector extends AbstractTestCaseSelector {
     }
 
     protected Transition getRandomTransition(TestCase tc) throws SinkStateReachedException {
-        TransitionSystem ts = getTransitionSystem();
+        T ts = getTransitionSystem();
         State state = tc == null ? ts.getInitialState() : tc.getLast().getTarget();
         List<Transition> outgoings = Lists.newArrayList(ts.getOutgoing(state));
         if (outgoings.isEmpty()) {

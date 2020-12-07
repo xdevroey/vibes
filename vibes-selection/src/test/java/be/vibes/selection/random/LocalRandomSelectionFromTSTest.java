@@ -45,9 +45,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class LocalRandomTestCaseSelectorTest {
+public class LocalRandomSelectionFromTSTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(LocalRandomTestCaseSelectorTest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocalRandomSelectionFromTSTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -75,7 +75,7 @@ public class LocalRandomTestCaseSelectorTest {
         factory.addTransition("s5", "act50", "s0");
         TransitionSystem lts = factory.build();
         Set<State> states = Sets.newHashSet(lts.getState("s3"));
-        LocalRandomTestCaseSelector selector = new LocalRandomTestCaseSelector(lts, states);
+        LocalRandomSelectionFromTS selector = new LocalRandomSelectionFromTS(lts, states);
         TestCase testCase = selector.select();
         List<Action> actions = new ArrayList<>();
         testCase.iterator().forEachRemaining((Transition t) ->{
@@ -99,7 +99,7 @@ public class LocalRandomTestCaseSelectorTest {
         factory.addTransition("s5", "act50", "s0");
         TransitionSystem lts = factory.build();
         Set<State> states = Sets.newHashSet(lts.getState("s3"));
-        LocalRandomTestCaseSelector selector = new LocalRandomTestCaseSelector(lts, states);
+        LocalRandomSelectionFromTS selector = new LocalRandomSelectionFromTS(lts, states);
         TestCase testCase = selector.select();
         LOG.error("No possible path for given LTS and states, should hav launched a TestCaseSelectionException!");
     }
