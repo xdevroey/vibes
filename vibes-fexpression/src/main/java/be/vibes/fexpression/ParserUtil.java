@@ -46,7 +46,7 @@ public class ParserUtil {
      */
     public FExpression parse(String expression) throws ParserException {
         try {
-            return parse(CharStreams.fromString(expression));
+            return parse(new ANTLRInputStream(expression));
         } catch (IOException e) {
             throw new ParserException("IOException while parsing!", e);
         }
@@ -60,7 +60,7 @@ public class ParserUtil {
      * @throws IOException
      */
     public FExpression parse(InputStream input) throws ParserException, IOException {
-        return parse(CharStreams.fromStream(input));
+        return parse(new ANTLRInputStream(input));
     }
 
     /**
@@ -70,7 +70,7 @@ public class ParserUtil {
      * @throws ParserException If an error occurs while parsing expression
      * @throws IOException
      */
-    public FExpression parse(CharStream input) throws ParserException, IOException {
+    public FExpression parse(ANTLRInputStream input) throws ParserException, IOException {
         CommonTokenStream tokens = new CommonTokenStream(new FexpressionLexer(input));
         FexpressionParser parser = new FexpressionParser(tokens);
         try {

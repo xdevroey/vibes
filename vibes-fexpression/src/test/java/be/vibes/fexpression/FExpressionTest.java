@@ -19,11 +19,9 @@ package be.vibes.fexpression;
  * limitations under the License.
  * #L%
  */
+import static org.junit.Assert.*;
 
-import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;

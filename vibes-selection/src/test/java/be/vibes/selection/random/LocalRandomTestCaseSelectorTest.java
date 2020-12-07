@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
@@ -101,7 +101,7 @@ public class LocalRandomTestCaseSelectorTest {
         Set<State> states = Sets.newHashSet(lts.getState("s3"));
         LocalRandomTestCaseSelector selector = new LocalRandomTestCaseSelector(lts, states);
         TestCase testCase = selector.select();
-        LOG.error("No possible path for given LTS and states, should hav launched a TestCaseSelectionException!");
+        fail("No possible path for given LTS and states, should hav launched a TestCaseSelectionException!");
     }
 
 }

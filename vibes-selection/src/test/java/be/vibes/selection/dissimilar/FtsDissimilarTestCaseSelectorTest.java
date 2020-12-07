@@ -25,7 +25,7 @@ import be.vibes.solver.BDDSolverFacade;
 import be.vibes.ts.FeaturedTransitionSystem;
 import be.vibes.ts.TestCase;
 import be.vibes.ts.io.xml.XmlLoaders;
-import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;

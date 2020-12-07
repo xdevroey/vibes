@@ -21,11 +21,12 @@ package be.unamur.transitionsystem.dsl;
  */
 
 import be.vibes.dsl.ts.TransitionSystemDefinition;
+import be.vibes.ts.Action;
 import be.vibes.ts.TransitionSystem;
 import com.google.common.collect.Lists;
 import java.util.List;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Rule;
 import org.junit.rules.TestRule;

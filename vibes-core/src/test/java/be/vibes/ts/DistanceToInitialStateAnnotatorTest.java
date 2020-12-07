@@ -28,7 +28,7 @@ package be.vibes.ts;
 
 import java.util.Iterator;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 import org.junit.Rule;
 import org.junit.rules.TestRule;
