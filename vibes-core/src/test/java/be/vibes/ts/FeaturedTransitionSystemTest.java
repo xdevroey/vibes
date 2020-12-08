@@ -23,7 +23,7 @@ package be.vibes.ts;
 import be.vibes.fexpression.FExpression;
 import static be.vibes.fexpression.FExpression.*;
 import com.google.common.collect.Lists;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 import org.junit.Rule;

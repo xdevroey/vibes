@@ -126,7 +126,7 @@ public class BDDSolverFacadeTest {
         Set<SimpleConfiguration> expected = Sets.newHashSet();
         File results = new File(Sat4JSolverFacadeTest.class.getClassLoader().getResource("svm.splot.solutions.txt").toURI());
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()
-                .split(Files.toString(results, Charsets.UTF_8))) {
+                .split(Files.asCharSource(results, Charsets.UTF_8).read())) {
             String[] tabLine = line.split(",");
             if (tabLine.length > 0) {
                 Feature[] features = new Feature[tabLine.length];

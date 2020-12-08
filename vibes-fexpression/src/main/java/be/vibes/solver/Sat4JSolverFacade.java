@@ -9,9 +9,9 @@ package be.vibes.solver;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,34 +19,9 @@ package be.vibes.solver;
  * limitations under the License.
  * #L%
  */
+
 import be.vibes.fexpression.DimacsFormatter;
 import be.vibes.fexpression.DimacsModel;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Set;
-
-import org.sat4j.core.VecInt;
-import org.sat4j.minisat.SolverFactory;
-import org.sat4j.minisat.core.Solver;
-import org.sat4j.minisat.orders.RandomLiteralSelectionStrategy;
-import org.sat4j.minisat.orders.RandomWalkDecorator;
-import org.sat4j.minisat.orders.VarOrderHeap;
-import org.sat4j.specs.ContradictionException;
-import org.sat4j.specs.IConstr;
-import org.sat4j.specs.IProblem;
-import org.sat4j.specs.ISolver;
-import org.sat4j.specs.TimeoutException;
-import org.sat4j.tools.ModelIterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.Iterators;
-
-import static com.google.common.base.Preconditions.*;
 import be.vibes.fexpression.FExpression;
 import be.vibes.fexpression.Feature;
 import be.vibes.fexpression.configuration.Configuration;
@@ -55,8 +30,25 @@ import be.vibes.fexpression.exception.DimacsFormatException;
 import be.vibes.solver.exception.ConstraintNotFoundException;
 import be.vibes.solver.exception.ConstraintSolvingException;
 import be.vibes.solver.exception.SolverInitializationException;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.sat4j.core.VecInt;
+import org.sat4j.minisat.SolverFactory;
+import org.sat4j.minisat.core.Solver;
+import org.sat4j.minisat.orders.RandomLiteralSelectionStrategy;
+import org.sat4j.minisat.orders.RandomWalkDecorator;
+import org.sat4j.minisat.orders.VarOrderHeap;
+import org.sat4j.specs.*;
+import org.sat4j.tools.ModelIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> {
 
@@ -65,7 +57,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
     private ISolver solver;
     private DimacsModel model;
     private Set<ConstraintIdentifier> deliveredIds = Sets.newHashSet();
-    
+
     public Sat4JSolverFacade(DimacsModel model) throws SolverInitializationException {
         this.model = model;
         // Initialize solver
@@ -126,7 +118,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
         logger.debug("Loading the model into the solver");
         try {
             for (int[] clause : model.getDimacsFD()) {
-                logger.debug("Adding clause {} to solver", Arrays.toString(clause));
+                logger.trace("Adding clause {} to solver", Arrays.toString(clause));
                 this.solver.addClause(new VecInt(clause));
             }
         } catch (ContradictionException e) {
@@ -135,7 +127,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
             logger.debug("ContradictionException while creating Sat4JSolverFacade", e);
             throw new SolverInitializationException(
                     "Could not initialize solver due to empty clause or "
-                    + "unsatisfyable problem!", e);
+                            + "unsatisfyable problem!", e);
         }
 
         logger.debug("{} clauses added to the solver", model.getDimacsFD().size());
@@ -146,45 +138,43 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
             throws SolverInitializationException, SolverFatalErrorException {
         logger.trace("Adding expression {} to solver", constraint);
         Sat4JContraintIdentifier id = new Sat4JContraintIdentifier(constraint);
-        // If the node is true, stop
-        if (constraint.equals(FExpression.trueValue())) {
-            return id;
-        }
-        // else compute DIMACS
-        int[][] constraints;
-        try {
-            constraints = DimacsFormatter.format(constraint, model.getFeatureMapping());
-            logger.trace("CNF version of expression {} has {} clauses", constraint,
-                    constraints.length);
-        } catch (DimacsFormatException ex) {
-            logger.error("Exception while formatting contraint {}!", constraint, ex);
-            throw new SolverInitializationException("Could not format constraint to DIMACS to add to solver", ex);
-        }
-        // and add them to the solver
-        for (int[] constr : constraints) {
+        // If the node is not true, compute DIMACS
+        if (!constraint.equals(FExpression.trueValue())) {
+            int[][] constraints;
             try {
-                logger.trace("Adding {} clause to solver", Arrays.toString(constr));
-                id.addSat4JConstraint(this.solver.addClause(new VecInt(constr)), constr);
-            } catch (ContradictionException e) {
-                // If one of the clauses is empty or if one of the clauses
-                // contains only falsified literals after unit propagation
-                // remove already added constraints
+                constraints = DimacsFormatter.format(constraint, model.getFeatureMapping());
+                logger.trace("CNF version of expression {} has {} clauses", constraint,
+                        constraints.length);
+            } catch (DimacsFormatException ex) {
+                logger.error("Exception while formatting contraint {}!", constraint, ex);
+                throw new SolverInitializationException("Could not format constraint to DIMACS to add to solver", ex);
+            }
+            // and add them to the solver
+            for (int[] constr : constraints) {
                 try {
-                    logger.trace(
-                            "Clauses is empty or one of the clauses contains only falsified literals after unit propagation",
-                            e);
-                    removeConstraint(id);
-                } catch (ConstraintNotFoundException e1) {
-                    logger.error("Constraint not found!", e);
-                    throw new SolverFatalErrorException(
-                            "Could not completely remove constraint from solver. "
-                            + "Solver in inconsistant state, should be reset!",
-                            e1);
+                    logger.trace("Adding {} clause to solver", Arrays.toString(constr));
+                    id.addSat4JConstraint(this.solver.addClause(new VecInt(constr)), constr);
+                } catch (ContradictionException e) {
+                    // If one of the clauses is empty or if one of the clauses
+                    // contains only falsified literals after unit propagation
+                    // remove already added constraints
+                    try {
+                        logger.trace(
+                                "Clauses is empty or one of the clauses contains only falsified literals after unit propagation",
+                                e);
+                        removeConstraint(id);
+                    } catch (ConstraintNotFoundException e1) {
+                        logger.error("Constraint not found!", e);
+                        throw new SolverFatalErrorException(
+                                "Could not completely remove constraint from solver. "
+                                        + "Solver in inconsistant state, should be reset!",
+                                e1);
+                    }
+                    throw new SolverInitializationException(
+                            "Could not add constraint to the solver due to empty clause ("
+                                    + Arrays.toString(constr) + ") or "
+                                    + "unsatisfyable problem!", e);
                 }
-                throw new SolverInitializationException(
-                        "Could not add constraint to the solver due to empty clause ("
-                        + Arrays.toString(constr) + ") or "
-                        + "unsatisfyable problem!", e);
             }
         }
         this.deliveredIds.add(id);
@@ -196,26 +186,26 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
             throws ConstraintNotFoundException, SolverFatalErrorException {
         checkArgument(id instanceof Sat4JContraintIdentifier,
                 "Argument id must be instance of Sat4JContraintIdentifier!");
-        if (!this.deliveredIds.contains(id)) {
-            return;
-        }
-        Iterator<IConstr> it = ((Sat4JContraintIdentifier) id).iteratorIConstr();
-        IConstr constr;
-        while (it.hasNext()) {
-            constr = it.next();
-            logger.trace("Removing IConstr '{}' from solver", constr);
-            try {
-                if (constr != null && !this.solver.removeConstr(constr)) {
-                    throw new SolverFatalErrorException(
-                            "Failed to remove constraint's clause "
-                            + constr
-                            + " from solver. Solver in incosistant state, should be reset!");
+        if (this.deliveredIds.contains(id) && !id.getConstraint().equals(FExpression.trueValue())) {
+            Iterator<IConstr> it = ((Sat4JContraintIdentifier) id).iteratorIConstr();
+            IConstr constr;
+            while (it.hasNext()) {
+                constr = it.next();
+                logger.trace("Removing IConstr '{}' from solver", constr);
+                try {
+                    if (constr != null && !this.solver.removeConstr(constr)) {
+                        throw new SolverFatalErrorException(
+                                "Failed to remove constraint's clause "
+                                        + constr
+                                        + " from solver. Solver in incosistant state, should be reset!");
+                    }
+                } catch (NoSuchElementException e) {
+                    logger.error(
+                            "Unexpected exception occured ... SAT4J implementation ? :-/ ", e);
                 }
-            } catch (NoSuchElementException e) {
-                logger.error(
-                        "Unexpected exception occured ... SAT4J implementation ? :-/ ", e);
             }
         }
+        this.deliveredIds.remove(id);
     }
 
     @Override
@@ -273,7 +263,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
 
     /**
      * @throws UnsupportedOperationException Always thrown when the method is
-     * invoked
+     *                                       invoked
      */
     @Override
     public void remove() {
@@ -291,7 +281,7 @@ public class Sat4JSolverFacade implements FeatureModel, Iterator<Configuration> 
     }
 
     /*
-     * Setting the reuse of the state of the solver between calls 
+     * Setting the reuse of the state of the solver between calls
      */
     public void setKeepSolverHot(boolean hot) {
         solver.setKeepSolverHot(hot);

@@ -19,11 +19,11 @@ public class TestSuiteGeneration<T extends TransitionSystem> implements Problem<
 
     private static final Logger LOG = LoggerFactory.getLogger(TestSuiteGeneration.class);
 
-    private RandomSelection<T> selection;
-    private Executor<T> executor;
-    private List<Objective> objectives;
-    private int testSuiteSize;
-    private String name;
+    private final RandomSelection<T> selection;
+    private final Executor<T> executor;
+    private final List<Objective> objectives;
+    private final int testSuiteSize;
+    private final String name;
 
     public TestSuiteGeneration(int testSuiteSize, RandomSelection<T> selection, Executor<T> executor) {
         this(testSuiteSize, selection, executor, "test suite generation");
@@ -32,7 +32,9 @@ public class TestSuiteGeneration<T extends TransitionSystem> implements Problem<
     public TestSuiteGeneration(int testSuiteSize, RandomSelection<T> selection, Executor<T> executor, String name) {
         this.testSuiteSize = testSuiteSize;
         this.selection = selection;
+        this.executor = executor;
         this.name = name;
+        this.objectives = new ArrayList<>();
     }
 
     @Override
@@ -53,10 +55,6 @@ public class TestSuiteGeneration<T extends TransitionSystem> implements Problem<
     @Override
     public String getName() {
         return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -91,5 +89,9 @@ public class TestSuiteGeneration<T extends TransitionSystem> implements Problem<
             }
         }
         return solution;
+    }
+
+    public void addObjective(Objective objective){
+        this.objectives.add(objective);
     }
 }

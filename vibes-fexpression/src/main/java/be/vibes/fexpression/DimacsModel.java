@@ -152,7 +152,7 @@ public class DimacsModel {
                 .split(Files.asCharSource(mapping, Charsets.UTF_8).read())) {
             LOG.trace("line = " + line);
             tabLine = line.split(" ");
-            if (tabLine.length >= 1 || tabLine.length <= 2) {
+            if (tabLine.length >= 1 || tabLine.length <= 2) { //FIXME Debug the condition (always true right now)
                 featureMapping.put(
                         tabLine.length > 1 ? tabLine[1] : Integer.toString(featureMapping
                                         .size() + 1), Integer.valueOf(tabLine[0]));
