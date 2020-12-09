@@ -31,14 +31,14 @@ import static java.lang.Integer.min;
  * @author Xavier Devroey - xavier.devroey@unamur.be
  * @param <T>
  */
-public class LevenshteinDissimilarityComputor<T extends List> implements SequenceBasedDissimilarityComputor<T> {
+public class LevenshteinDissimilarity<T extends List> implements SequenceBasedDissimilarity<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(LevenshteinDissimilarityComputor.class);
+    private static final Logger logger = LoggerFactory.getLogger(LevenshteinDissimilarity.class);
 
     private static final int INSERT_DELETE_COST = 1;
     private static final int REPLACE_COST = 1;
 
-    public LevenshteinDissimilarityComputor() {
+    public LevenshteinDissimilarity() {
     }
 
     @Override

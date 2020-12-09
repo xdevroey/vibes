@@ -21,15 +21,13 @@ package be.vibes.selection.dissimilar;
  * #L%
  */
 
-import java.util.Set;
+import java.util.List;
 
 /**
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
- * @param <T> The type of sets to compare
+ * @param <T> The type of sequences to compare.
  */
-public interface SetBasedDissimilarityComputor<T extends Set> extends DissimilarityComputor<T>{
-    
-    
-    
+public interface SequenceBasedDissimilarity<T extends List> extends Dissimilarity<T> {
+
 }

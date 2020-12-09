@@ -39,37 +39,37 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
-public class FtsTestCaseDissimilarityComputor extends TestCaseDissimilarityComputor {
+public class FtsTestCaseDissimilarity extends TestCaseDissimilarity {
 
     private static final Logger LOG = LoggerFactory
-            .getLogger(FtsTestCaseDissimilarityComputor.class);
+            .getLogger(FtsTestCaseDissimilarity.class);
 
-    private final TestCaseDissimilarityComputor testCaseDissimilarity;
+    private final TestCaseDissimilarity testCaseDissimilarity;
     private FeatureModel fm;
     private final BinaryOperator<Double> combineOperator;
     private FeaturedTransitionSystem fts;
 
-    public FtsTestCaseDissimilarityComputor(FeatureModel solver, FeaturedTransitionSystem fts) {
-        this(solver, new JaccardDissimilarityComputor(), fts);
+    public FtsTestCaseDissimilarity(FeatureModel solver, FeaturedTransitionSystem fts) {
+        this(solver, new JaccardDissimilarity(), fts);
     }
 
-    public FtsTestCaseDissimilarityComputor(FeatureModel solver, TestCaseDissimilarityComputor computor, FeaturedTransitionSystem fts) {
+    public FtsTestCaseDissimilarity(FeatureModel solver, TestCaseDissimilarity computor, FeaturedTransitionSystem fts) {
         this(solver, computor, (Double x, Double y) -> x * y, fts);
     }
 
-    public FtsTestCaseDissimilarityComputor(FeatureModel solver, TestCaseDissimilarityComputor computor, BinaryOperator<Double> combineOperator, FeaturedTransitionSystem fts) {
+    public FtsTestCaseDissimilarity(FeatureModel solver, TestCaseDissimilarity computor, BinaryOperator<Double> combineOperator, FeaturedTransitionSystem fts) {
         this.fm = solver;
         this.testCaseDissimilarity = computor;
         this.combineOperator = combineOperator;
         this.fts = fts;
     }
 
-    public FtsTestCaseDissimilarityComputor(FeatureModel solver, SetBasedDissimilarityComputor<? extends Set> computor, FeaturedTransitionSystem fts) {
-        this(solver, TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(computor), fts);
+    public FtsTestCaseDissimilarity(FeatureModel solver, SetBasedDissimilarity<? extends Set> computor, FeaturedTransitionSystem fts) {
+        this(solver, TestCaseDissimilarity.toTestCaseDissimilarityComputor(computor), fts);
     }
 
-    public FtsTestCaseDissimilarityComputor(FeatureModel solver, SequenceBasedDissimilarityComputor<? extends List> computor, FeaturedTransitionSystem fts) {
-        this(solver, TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(computor), fts);
+    public FtsTestCaseDissimilarity(FeatureModel solver, SequenceBasedDissimilarity<? extends List> computor, FeaturedTransitionSystem fts) {
+        this(solver, TestCaseDissimilarity.toTestCaseDissimilarityComputor(computor), fts);
     }
 
     public void setFm(FeatureModel fm) {

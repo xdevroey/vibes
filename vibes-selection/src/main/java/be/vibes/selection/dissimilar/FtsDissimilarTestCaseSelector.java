@@ -37,12 +37,12 @@ public class FtsDissimilarTestCaseSelector extends DissimilarTestCaseSelector{
     private static final Logger LOG = LoggerFactory.getLogger(DissimilarTestCaseSelector.class);
     private FeatureModel fm;
 
-    public FtsDissimilarTestCaseSelector(TransitionSystem ts, FeatureModel fm, PrioritizationTechnique prioritization) {
+    public FtsDissimilarTestCaseSelector(TransitionSystem ts, FeatureModel fm, Prioritization prioritization) {
         super(ts, prioritization);
         this.fm = fm;
     }
     
-    public FtsDissimilarTestCaseSelector(TransitionSystem ts, FeatureModel fm, PrioritizationTechnique prioritization, long runningTime) {
+    public FtsDissimilarTestCaseSelector(TransitionSystem ts, FeatureModel fm, Prioritization prioritization, long runningTime) {
         super(ts, prioritization, runningTime);
         this.fm = fm;
     }

@@ -28,12 +28,12 @@ import be.vibes.ts.TestCase;
 import be.vibes.selection.exception.DissimilarityComputationException;
 import static com.google.common.base.Preconditions.*;
 
-public class LocalMaximumDistancePrioritization implements PrioritizationTechnique {
+public class LocalMaximumDistancePrioritization implements Prioritization {
 
-    private final TestCaseDissimilarityComputor comp;
+    private final TestCaseDissimilarity comp;
     private double fitness;
 
-    public LocalMaximumDistancePrioritization(TestCaseDissimilarityComputor comp) {
+    public LocalMaximumDistancePrioritization(TestCaseDissimilarity comp) {
         this.comp = comp;
         this.fitness = 0;
     }

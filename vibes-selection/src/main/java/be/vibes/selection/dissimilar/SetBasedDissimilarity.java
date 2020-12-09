@@ -1,3 +1,4 @@
+
 package be.vibes.selection.dissimilar;
 
 /*-
@@ -25,12 +26,10 @@ import java.util.Set;
 /**
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
- * @param <T>
+ * @param <T> The type of sets to compare
  */
-public class AntiDiceDissimilarityComputor<T extends Set> extends JaccardDissimilarityComputor<T> {
-
-    public AntiDiceDissimilarityComputor() {
-        super(2.0);
-    }
-
+public interface SetBasedDissimilarity<T extends Set> extends Dissimilarity<T> {
+    
+    
+    
 }

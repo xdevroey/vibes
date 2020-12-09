@@ -63,7 +63,7 @@ public class FtsDissimilarTestCaseSelectorTest {
         FeaturedTransitionSystem fts = XmlLoaders.loadFeaturedTransitionSystem(input);
         DimacsModel model = DimacsModel.createFromDimacsFile(dimacsModel);
         BDDSolverFacade solver = new BDDSolverFacade(model);
-        FtsTestCaseDissimilarityComputor comp = new FtsTestCaseDissimilarityComputor(solver, fts);
+        FtsTestCaseDissimilarity comp = new FtsTestCaseDissimilarity(solver, fts);
         LocalMaximumDistancePrioritization prior = new LocalMaximumDistancePrioritization(comp);
         FtsDissimilarTestCaseSelector gen = new FtsDissimilarTestCaseSelector(fts, solver, prior);
         gen.setRunningTime(1000);
@@ -78,7 +78,7 @@ public class FtsDissimilarTestCaseSelectorTest {
         FeaturedTransitionSystem fts = XmlLoaders.loadFeaturedTransitionSystem(input);
         DimacsModel model = DimacsModel.createFromDimacsFile(dimacsModel);
         BDDSolverFacade solver = new BDDSolverFacade(model);
-        FtsTestCaseDissimilarityComputor comp = new FtsTestCaseDissimilarityComputor(solver, fts);
+        FtsTestCaseDissimilarity comp = new FtsTestCaseDissimilarity(solver, fts);
         GlobalMaximumDistancePrioritization prior = new GlobalMaximumDistancePrioritization(comp);
         FtsDissimilarTestCaseSelector gen = new FtsDissimilarTestCaseSelector(fts, solver, prior);
         gen.setRunningTime(1000);

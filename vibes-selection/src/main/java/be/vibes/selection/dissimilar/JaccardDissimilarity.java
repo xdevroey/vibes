@@ -26,16 +26,16 @@ import com.google.common.collect.Sets;
 
 import static com.google.common.base.Preconditions.*;
 
-public class JaccardDissimilarityComputor<T extends Set> implements
-        SetBasedDissimilarityComputor<T> {
+public class JaccardDissimilarity<T extends Set> implements
+        SetBasedDissimilarity<T> {
     
     private double w;
     
-    protected JaccardDissimilarityComputor(double w){
+    protected JaccardDissimilarity(double w){
         this.w = w;
     }
     
-    public JaccardDissimilarityComputor(){
+    public JaccardDissimilarity(){
         this(1);
     }
 

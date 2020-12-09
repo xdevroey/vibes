@@ -27,12 +27,12 @@ import com.google.common.collect.Lists;
 import be.vibes.selection.exception.DissimilarityComputationException;
 import be.vibes.ts.TestCase;
 
-public class GlobalMaximumDistancePrioritization implements PrioritizationTechnique {
+public class GlobalMaximumDistancePrioritization implements Prioritization {
 
-    private final TestCaseDissimilarityComputor comp;
+    private final TestCaseDissimilarity comp;
     private double fitness;
 
-    public GlobalMaximumDistancePrioritization(TestCaseDissimilarityComputor comp) {
+    public GlobalMaximumDistancePrioritization(TestCaseDissimilarity comp) {
         this.comp = comp;
         this.fitness = 0;
     }

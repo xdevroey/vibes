@@ -1,3 +1,4 @@
+
 package be.vibes.selection.dissimilar;
 
 /*-
@@ -21,19 +22,31 @@ package be.vibes.selection.dissimilar;
  */
 
 import be.vibes.selection.exception.DissimilarityComputationException;
+import com.google.common.collect.Multiset;
+import java.util.Iterator;
+import static java.lang.Integer.min;
 
-public interface DissimilarityComputor<T> {
+/**
+ *
+ * @author Xavier Devroey - xavier.devroey@unamur.be
+ * @param <T>
+ */
+public class CountingDissimilarity<T extends Multiset> implements Dissimilarity<T> {
 
-    /**
-     * Returns a value between 0.0 (dissimilar) and 1.0 (similar) indicating the
-     * similarity degree between o1 and o2. If similarity(o1,o2) == 1.0, then
-     * o1.equals(o2) is true.
-     *
-     * @param o1 The first object to compare.
-     * @param o2 The second object to compare.
-     * @return a Value between 0.0 (dissimilar) and 1.0 (similar).
-     * @throws DissimilarityComputationException
-     */
-    public double dissimilarity(T o1, T o2) throws DissimilarityComputationException;
+    public CountingDissimilarity() {
+    }
+
+    @Override
+    public double dissimilarity(T s1, T s2) throws DissimilarityComputationException {
+        int countIdentical = 0;
+        Iterator it = s1.entrySet().iterator();
+        while(it.hasNext()){
+            Multiset.Entry e = (Multiset.Entry) it.next();
+            countIdentical = countIdentical + min(e.getCount(), s2.count(e.getElement()));
+        }
+        return 1.0 - (countIdentical / ((s1.size() + s2.size()) / 2.0));
+    }
+    
+    
 
 }

@@ -25,7 +25,7 @@ import java.util.List;
 import be.vibes.selection.exception.DissimilarityComputationException;
 import be.vibes.ts.TestCase;
 
-public interface PrioritizationTechnique {
+public interface Prioritization {
 
     /**
      * Returns a prioritized (fresh list) of the given list of test-cases.

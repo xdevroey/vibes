@@ -42,9 +42,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class JaccardDissimilarityComputorTest {
+public class JaccardDissimilarityTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(JaccardDissimilarityComputorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(JaccardDissimilarityTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -59,7 +59,7 @@ public class JaccardDissimilarityComputorTest {
 
     @Test
     public void testGetDistanceNoIntersect() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str1 = "abc";
         String str2 = "def";
         double expected = 0.0;
@@ -68,7 +68,7 @@ public class JaccardDissimilarityComputorTest {
 
     @Test
     public void testGetDistanceIntersect() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str1 = "abcde";
         String str2 = "def";
         double expected = 2.0 / 6.0;
@@ -77,7 +77,7 @@ public class JaccardDissimilarityComputorTest {
     
     @Test
     public void testGetDistanceIntersect2() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str1 = "abc";
         String str2 = "abe";
         double expected = 2.0 / 4.0;
@@ -86,7 +86,7 @@ public class JaccardDissimilarityComputorTest {
     
     @Test
     public void testGetDistanceSame() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str = "abcde";
         double expected = 1.0;
         assertThat(dist.getDistance(toSet(str), toSet(str)), equalTo(expected));
@@ -94,7 +94,7 @@ public class JaccardDissimilarityComputorTest {
     
     @Test
     public void testGetDistanceEmpty() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str = "";
         double expected = 1.0;
         assertThat(dist.getDistance(toSet(str), toSet(str)), equalTo(expected));
@@ -102,7 +102,7 @@ public class JaccardDissimilarityComputorTest {
     
     @Test
     public void testGetDistanceOneEmpty() {
-        JaccardDissimilarityComputor<Set<Character>> dist = new JaccardDissimilarityComputor<>();
+        JaccardDissimilarity<Set<Character>> dist = new JaccardDissimilarity<>();
         String str1 = "";
         String str2 = "abcdef";
         double expected = 0.0;

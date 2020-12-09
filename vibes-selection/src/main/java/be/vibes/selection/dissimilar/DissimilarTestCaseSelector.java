@@ -41,16 +41,16 @@ public class DissimilarTestCaseSelector extends AbstractTestCaseSelector {
 
     public static final int DEFAULT_NUMBER_OF_TEST_CASES = 100;
 
-    private PrioritizationTechnique prioritization;
+    private Prioritization prioritization;
     private long runningTime;
     private double lastFitness;
     private int lastNbrIterations = 0;
 
-    public DissimilarTestCaseSelector(TransitionSystem ts, PrioritizationTechnique prioritization) {
+    public DissimilarTestCaseSelector(TransitionSystem ts, Prioritization prioritization) {
         this(ts, prioritization, DEFAULT_RUNNING_TIME_MILLI);
     }
 
-    public DissimilarTestCaseSelector(TransitionSystem ts, PrioritizationTechnique prioritization, long runningTime) {
+    public DissimilarTestCaseSelector(TransitionSystem ts, Prioritization prioritization, long runningTime) {
         super(ts);
         this.runningTime = runningTime;
         this.prioritization = prioritization;

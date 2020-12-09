@@ -31,19 +31,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class TestCaseDissimilarityComputor implements DissimilarityComputor<TestCase> {
+public class TestCaseDissimilarity implements Dissimilarity<TestCase> {
 
-    private DissimilarityComputor computor;
+    private Dissimilarity computor;
     private Function<TestCase, ? extends Collection> converter;
     
-    protected TestCaseDissimilarityComputor(){}
+    protected TestCaseDissimilarity(){}
     
-    private TestCaseDissimilarityComputor(SetBasedDissimilarityComputor computor, Function<TestCase, ? extends Collection> converter) {
+    private TestCaseDissimilarity(SetBasedDissimilarity computor, Function<TestCase, ? extends Collection> converter) {
         this.computor = computor;
         this.converter = converter;
     }
         
-    private TestCaseDissimilarityComputor(SequenceBasedDissimilarityComputor computor, Function<TestCase, ? extends Collection> converter) {
+    private TestCaseDissimilarity(SequenceBasedDissimilarity computor, Function<TestCase, ? extends Collection> converter) {
         this.computor = computor;
         this.converter = converter;
     }
@@ -58,8 +58,8 @@ public class TestCaseDissimilarityComputor implements DissimilarityComputor<Test
      * @param computor The dissimilarity computor to use with the sets of actions of two test cases.
      * @return A TestCaseDissimilarityComputor that will use the given dissimilarity computor to compute dissimilarity between two test cases.
      */
-    public static TestCaseDissimilarityComputor toTestCaseDissimilarityComputor(SetBasedDissimilarityComputor computor){
-        return new TestCaseDissimilarityComputor(computor, (TestCase testcase) -> {
+    public static TestCaseDissimilarity toTestCaseDissimilarityComputor(SetBasedDissimilarity computor){
+        return new TestCaseDissimilarity(computor, (TestCase testcase) -> {
             Set<Action> set = new HashSet<>();
             testcase.iterator().forEachRemaining((Transition tr) -> {set.add(tr.getAction());});
             return set;
@@ -71,8 +71,8 @@ public class TestCaseDissimilarityComputor implements DissimilarityComputor<Test
      * @param computor The dissimilarity computor to use with the sequences of actions of two test cases.
      * @return A TestCaseDissimilarityComputor that will use the given dissimilarity computor to compute dissimilarity between two test cases.
      */
-    public static TestCaseDissimilarityComputor toTestCaseDissimilarityComputor(SequenceBasedDissimilarityComputor computor){
-        return new TestCaseDissimilarityComputor(computor, (TestCase testcase) -> {
+    public static TestCaseDissimilarity toTestCaseDissimilarityComputor(SequenceBasedDissimilarity computor){
+        return new TestCaseDissimilarity(computor, (TestCase testcase) -> {
             List<Action> set = new ArrayList<>();
             testcase.iterator().forEachRemaining((Transition tr) -> {set.add(tr.getAction());});
             return set;

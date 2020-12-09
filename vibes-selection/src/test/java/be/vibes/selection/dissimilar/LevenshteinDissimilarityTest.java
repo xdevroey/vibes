@@ -36,9 +36,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class LevenshteinDissimilarityComputorTest {
+public class LevenshteinDissimilarityTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(LevenshteinDissimilarityComputorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(LevenshteinDissimilarityTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -56,7 +56,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "";
         String str2 = "";
         int expected = 0;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -65,7 +65,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "";
         String str2 = "abc";
         int expected = 3;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -74,7 +74,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "abcdef";
         String str2 = "";
         int expected = 6;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -83,7 +83,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "abcdef";
         String str2 = "abcdef";
         int expected = 0;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -92,7 +92,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "abcdef";
         String str2 = "ghijkl";
         int expected = 6;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -101,7 +101,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "abcdef";
         String str2 = "gh";
         int expected = 6;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -110,7 +110,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "ab";
         String str2 = "ghijkl";
         int expected = 6;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 
@@ -119,7 +119,7 @@ public class LevenshteinDissimilarityComputorTest {
         String str1 = "meilenstein";
         String str2 = "levenshtein";
         int expected = 4;
-        LevenshteinDissimilarityComputor<List<Character>> levenshtein = new LevenshteinDissimilarityComputor();
+        LevenshteinDissimilarity<List<Character>> levenshtein = new LevenshteinDissimilarity();
         assertThat(levenshtein.getDistance(toList(str1), toList(str2)), equalTo(expected));
     }
 

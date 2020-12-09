@@ -21,6 +21,8 @@ package be.vibes.selection.dissimilar;
  */
 
 import be.vibes.selection.exception.DissimilarityComputationException;
+import com.google.common.base.Preconditions;
+
 import java.util.Set;
 
 /**
@@ -28,7 +30,7 @@ import java.util.Set;
  * @author Xavier Devroey - xavier.devroey@unamur.be
  * @param <T>
  */
-public class HammingDissimilarityComputor<T extends Set> implements SetBasedDissimilarityComputor<T> {
+public class HammingDissimilarity<T extends Set> implements SetBasedDissimilarity<T> {
 
     private final T allElements;
 
@@ -39,7 +41,8 @@ public class HammingDissimilarityComputor<T extends Set> implements SetBasedDiss
      * elements of the sets used with the dissimilarity method must be included
      * in allElements.
      */
-    public HammingDissimilarityComputor(T allElements) {
+    public HammingDissimilarity(T allElements) {
+        Preconditions.checkArgument(!allElements.isEmpty(), "The set of all elements cannot be empty!");
         this.allElements = allElements;
     }
 

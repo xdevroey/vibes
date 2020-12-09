@@ -43,9 +43,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Xavier Devroey - xavier.devroey@unamur.be
  */
-public class HammingDissimilarityComputorTest {
+public class HammingDissimilarityTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(HammingDissimilarityComputorTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(HammingDissimilarityTest.class);
 
     @Rule
     public TestRule watcher = new TestWatcher() {
@@ -61,7 +61,7 @@ public class HammingDissimilarityComputorTest {
     @Test
     public void testGetDistanceSame() throws Exception{
         Set<Character> allElements = Sets.newHashSet('a', 'b', 'c', 'd', 'e', 'f');
-        HammingDissimilarityComputor<Set<Character>> dist = new HammingDissimilarityComputor(allElements);
+        HammingDissimilarity<Set<Character>> dist = new HammingDissimilarity(allElements);
         assertThat(dist.allPossibleElementsCount(), equalTo(allElements.size()));
         String str = "abc";
         double expected = 1.0;
@@ -71,7 +71,7 @@ public class HammingDissimilarityComputorTest {
     @Test
     public void testGetDistanceDifferentNonIntersect() throws Exception{
         Set<Character> allElements = Sets.newHashSet('a', 'b', 'c', 'd', 'e', 'f');
-        HammingDissimilarityComputor<Set<Character>> dist = new HammingDissimilarityComputor(allElements);
+        HammingDissimilarity<Set<Character>> dist = new HammingDissimilarity(allElements);
         assertThat(dist.allPossibleElementsCount(), equalTo(allElements.size()));
         String str1 = "abc";
         String str2 = "def";
@@ -82,7 +82,7 @@ public class HammingDissimilarityComputorTest {
     @Test
     public void testGetDistanceDifferentIntersect() throws Exception{
         Set<Character> allElements = Sets.newHashSet('a', 'b', 'c', 'd', 'e', 'f');
-        HammingDissimilarityComputor<Set<Character>> dist = new HammingDissimilarityComputor(allElements);
+        HammingDissimilarity<Set<Character>> dist = new HammingDissimilarity(allElements);
         assertThat(dist.allPossibleElementsCount(), equalTo(allElements.size()));
         String str1 = "abcde";
         String str2 = "cdef";
@@ -93,7 +93,7 @@ public class HammingDissimilarityComputorTest {
     @Test
     public void testGetDistanceDifferentCover() throws Exception{
         Set<Character> allElements = Sets.newHashSet('a', 'b', 'c', 'd', 'e', 'f');
-        HammingDissimilarityComputor<Set<Character>> dist = new HammingDissimilarityComputor(allElements);
+        HammingDissimilarity<Set<Character>> dist = new HammingDissimilarity(allElements);
         assertThat(dist.allPossibleElementsCount(), equalTo(allElements.size()));
         String str1 = "abcdef";
         String str2 = "cde";
@@ -104,7 +104,7 @@ public class HammingDissimilarityComputorTest {
     @Test
     public void testGetDistanceEmpty() throws Exception{
         Set<Character> allElements = Sets.newHashSet('a', 'b', 'c', 'd', 'e', 'f');
-        HammingDissimilarityComputor<Set<Character>> dist = new HammingDissimilarityComputor(allElements);
+        HammingDissimilarity<Set<Character>> dist = new HammingDissimilarity(allElements);
         assertThat(dist.allPossibleElementsCount(), equalTo(allElements.size()));
         String str1 = "";
         String str2 = "";

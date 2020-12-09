@@ -47,7 +47,7 @@ public class Dissimilar {
 
     private final TransitionSystem ts;
     private final FeatureModel fm;
-    private PrioritizationTechnique prior;
+    private Prioritization prior;
     private int nbrTestCases = DissimilarTestCaseSelector.DEFAULT_NUMBER_OF_TEST_CASES;
     private long runningTime = DissimilarTestCaseSelector.DEFAULT_RUNNING_TIME_MILLI;
 
@@ -90,12 +90,12 @@ public class Dissimilar {
      * test cases.
      * @return A partially configured algorithm.
      */
-    public Dissimilar withLocalMaxDistance(TestCaseDissimilarityComputor computor) {
-        checkArgument(!(computor instanceof FtsTestCaseDissimilarityComputor) || ((ts instanceof FeaturedTransitionSystem) && fm != null),
+    public Dissimilar withLocalMaxDistance(TestCaseDissimilarity computor) {
+        checkArgument(!(computor instanceof FtsTestCaseDissimilarity) || ((ts instanceof FeaturedTransitionSystem) && fm != null),
                 "A FtsTestCaseDissimilarityComputor computor may only be used with a FeaturedTransitionSystem and a FeatureModel!");
-        if (computor instanceof FtsTestCaseDissimilarityComputor) {
-            ((FtsTestCaseDissimilarityComputor) computor).setFts((FeaturedTransitionSystem) ts);
-            ((FtsTestCaseDissimilarityComputor) computor).setFm(fm);
+        if (computor instanceof FtsTestCaseDissimilarity) {
+            ((FtsTestCaseDissimilarity) computor).setFts((FeaturedTransitionSystem) ts);
+            ((FtsTestCaseDissimilarity) computor).setFm(fm);
         }
         this.prior = new LocalMaximumDistancePrioritization(computor);
         return this;
@@ -109,12 +109,12 @@ public class Dissimilar {
      * test cases.
      * @return A partially confifured algorithm.
      */
-    public Dissimilar withGlobalMaxDistance(TestCaseDissimilarityComputor computor) {
-        checkArgument(!(computor instanceof FtsTestCaseDissimilarityComputor) || ((ts instanceof FeaturedTransitionSystem) && fm != null),
+    public Dissimilar withGlobalMaxDistance(TestCaseDissimilarity computor) {
+        checkArgument(!(computor instanceof FtsTestCaseDissimilarity) || ((ts instanceof FeaturedTransitionSystem) && fm != null),
                 "A FtsTestCaseDissimilarityComputor computor may only be used with a FeaturedTransitionSystem and a FeatureModel!");
-        if (computor instanceof FtsTestCaseDissimilarityComputor) {
-            ((FtsTestCaseDissimilarityComputor) computor).setFts((FeaturedTransitionSystem) ts);
-            ((FtsTestCaseDissimilarityComputor) computor).setFm(fm);
+        if (computor instanceof FtsTestCaseDissimilarity) {
+            ((FtsTestCaseDissimilarity) computor).setFts((FeaturedTransitionSystem) ts);
+            ((FtsTestCaseDissimilarity) computor).setFm(fm);
         }
         this.prior = new GlobalMaximumDistancePrioritization(computor);
         return this;
@@ -174,50 +174,50 @@ public class Dissimilar {
      *
      * @param ts The transition system from which test cases are selected.
      * @return A new Hamming dissimilarity computor.
-     * @see HammingDissimilarityComputor
+     * @see HammingDissimilarity
      */
-    public static TestCaseDissimilarityComputor hamming(TransitionSystem ts) {
-        return TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(new HammingDissimilarityComputor(Sets.newHashSet(ts.actions())));
+    public static TestCaseDissimilarity hamming(TransitionSystem ts) {
+        return TestCaseDissimilarity.toTestCaseDissimilarityComputor(new HammingDissimilarity(Sets.newHashSet(ts.actions())));
     }
 
     /**
      * Returns a Jaccard dissimilarity computor.
      *
      * @return A new Jaccard dissimilarity computor.
-     * @see JaccardDissimilarityComputor
+     * @see JaccardDissimilarity
      */
-    public static TestCaseDissimilarityComputor jaccard() {
-        return TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(new JaccardDissimilarityComputor());
+    public static TestCaseDissimilarity jaccard() {
+        return TestCaseDissimilarity.toTestCaseDissimilarityComputor(new JaccardDissimilarity());
     }
 
     /**
      * Returns a Dice dissimilarity computor.
      *
      * @return A new Dice dissimilarity computor.
-     * @see DiceDissimilarityComputor
+     * @see DiceDissimilarity
      */
-    public static TestCaseDissimilarityComputor dice() {
-        return TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(new DiceDissimilarityComputor());
+    public static TestCaseDissimilarity dice() {
+        return TestCaseDissimilarity.toTestCaseDissimilarityComputor(new DiceDissimilarity());
     }
 
     /**
      * Returns a Antidice dissimilarity computor.
      *
      * @return A new Antidice dissimilarity computor.
-     * @see AntiDiceDissimilarityComputor
+     * @see AntiDiceDissimilarity
      */
-    public static TestCaseDissimilarityComputor antidice() {
-        return TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(new AntiDiceDissimilarityComputor());
+    public static TestCaseDissimilarity antidice() {
+        return TestCaseDissimilarity.toTestCaseDissimilarityComputor(new AntiDiceDissimilarity());
     }
 
     /**
      * Returns a Levenshtein dissimilarity computor.
      *
      * @return A new Levenshtein dissimilarity computor.
-     * @see LevenshteinDissimilarityComputor
+     * @see LevenshteinDissimilarity
      */
-    public static TestCaseDissimilarityComputor levenshtein() {
-        return TestCaseDissimilarityComputor.toTestCaseDissimilarityComputor(new LevenshteinDissimilarityComputor());
+    public static TestCaseDissimilarity levenshtein() {
+        return TestCaseDissimilarity.toTestCaseDissimilarityComputor(new LevenshteinDissimilarity());
     }
 
     /**
@@ -227,10 +227,10 @@ public class Dissimilar {
      * jaccard(prods(tc1), prods(tc2)) * jaccard(tc1, tc3).
      *
      * @return A new FTS test cases dissimilarity computor.
-     * @see FtsTestCaseDissimilarityComputor
+     * @see FtsTestCaseDissimilarity
      */
-    public static FtsTestCaseDissimilarityComputor ftsDissimilarity() {
-        return new FtsTestCaseDissimilarityComputor(null, null);
+    public static FtsTestCaseDissimilarity ftsDissimilarity() {
+        return new FtsTestCaseDissimilarity(null, null);
     }
 
     /**
@@ -270,8 +270,8 @@ public class Dissimilar {
      * @return A dissimilarity computer to use in method withLocalMaxDistance or
      * withGlobalMaxDistance.
      */
-    public static FtsTestCaseDissimilarityComputor ftsDissimilarity(FeatureModel fm, TestCaseDissimilarityComputor computor) {
-        return new FtsTestCaseDissimilarityComputor(null, computor, null);
+    public static FtsTestCaseDissimilarity ftsDissimilarity(FeatureModel fm, TestCaseDissimilarity computor) {
+        return new FtsTestCaseDissimilarity(null, computor, null);
     }
 
     /**
@@ -290,8 +290,8 @@ public class Dissimilar {
      * @return A dissimilarity computer to use in method withLocalMaxDistance or
      * withGlobalMaxDistance.
      */
-    public static FtsTestCaseDissimilarityComputor ftsDissimilarity(FeatureModel fm, TestCaseDissimilarityComputor computor, BinaryOperator<Double> combineOperator) {
-        return new FtsTestCaseDissimilarityComputor(null, computor, combineOperator, null);
+    public static FtsTestCaseDissimilarity ftsDissimilarity(FeatureModel fm, TestCaseDissimilarity computor, BinaryOperator<Double> combineOperator) {
+        return new FtsTestCaseDissimilarity(null, computor, combineOperator, null);
     }
 
 }

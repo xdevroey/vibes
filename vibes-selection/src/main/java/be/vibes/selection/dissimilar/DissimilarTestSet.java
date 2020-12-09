@@ -30,15 +30,15 @@ import be.vibes.ts.TestSet;
 public class DissimilarTestSet extends TestSet implements Comparable<DissimilarTestSet> {
 
     private double fitness;
-    private final PrioritizationTechnique priorotizationTech;
+    private final Prioritization priorotizationTech;
 
-    public DissimilarTestSet(Iterator<? extends TestCase> testCases, PrioritizationTechnique technique) {
+    public DissimilarTestSet(Iterator<? extends TestCase> testCases, Prioritization technique) {
         super(testCases);
         fitness = -1;
         priorotizationTech = technique;
     }
 
-    public DissimilarTestSet(Collection<? extends TestCase> testCases, PrioritizationTechnique technique) {
+    public DissimilarTestSet(Collection<? extends TestCase> testCases, Prioritization technique) {
         super(testCases);
         fitness = -1;
         priorotizationTech = technique;
