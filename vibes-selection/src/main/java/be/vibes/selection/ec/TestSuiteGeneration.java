@@ -64,9 +64,7 @@ public class TestSuiteGeneration<T extends TransitionSystem> implements Problem<
             TestCase testCase = solution.getVariable(i);
             try {
                 this.executor.execute(testCase);
-                this.executor.getCurrentExecutions().forEachRemaining((exec) -> {
-                    executions.add(exec);
-                });
+                this.executor.getCurrentExecutions().forEachRemaining(executions::add);
                 this.executor.reset();
             } catch (TransitionSystenExecutionException e) {
                 LOG.error("Error while executing the generated tests!", e);

@@ -70,11 +70,11 @@ public class DimacsModel {
         return new DimacsModel(mapping, dimacs);
     }
 
-    public static DimacsModel createFromFeatureList(List<String> features) {
+    public static DimacsModel createFromListOfFeatures(List<String> features) {
         return new DimacsModel(features);
     }
 
-    public static DimacsModel createFromFeatureList(FExpression fd) throws DimacsFormatException {
+    public static DimacsModel createFromFExpression(FExpression fd) throws DimacsFormatException {
         return new DimacsModel(fd);
     }
 
@@ -111,7 +111,7 @@ public class DimacsModel {
 
     private DimacsModel(File dimacs) throws IOException {
         // Read mapping 
-        LOG.debug("Read mapping");
+        LOG.trace("Read mapping");
         featureMapping = HashBiMap.create();
         String[] tabLine;
         int nbrClauses = 0;
@@ -145,7 +145,7 @@ public class DimacsModel {
         checkArgument(mapping.exists() && mapping.isFile(), "Mapping file %s not found!", mapping);
         checkArgument((dimacs == null) || (dimacs.exists() && dimacs.isFile()), "Dimacs file %s not found!", dimacs);
         // Read mapping 
-        LOG.debug("Read mapping");
+        LOG.trace("Read mapping");
         featureMapping = HashBiMap.create();
         String[] tabLine;
         for (String line : Splitter.on(CharMatcher.anyOf("\n\r")).omitEmptyStrings()

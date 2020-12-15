@@ -49,9 +49,9 @@ public class DimacsFormatter implements FExpressionVisitorWithReturn<Object> {
         Object ret = null;
         try {
             FExpression cnf = expression.toCnf();
-            logger.debug("CNF version of expression {} is {} ", expression, cnf);
+            logger.trace("CNF version of expression {} is {} ", expression, cnf);
             ret = cnf.accept(form);
-            logger.debug("Dimacs format result is {}", ret);
+            logger.trace("Dimacs format result is {}", ret);
         } catch (FExpressionException ex) {
             throw (DimacsFormatException) ex;
         }

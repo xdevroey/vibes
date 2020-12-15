@@ -16,7 +16,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkState;
 
 /**
- * This objective seeks to increase the similarity of the products required to execute the different test,
+ * This objective seeks to increase the similarity (i.e., reduce dissimilarity) of the products required to execute the different test,
  * when selecting tests from a Featured Transition System. More than one product are requires if
  * two or more tests are incompatible (for instance, if the tests executes transitions with incompatible
  * feature expressions). Increasing similarity reduces the number of products required to execute the
@@ -41,17 +41,17 @@ public class ProductsSimilarity implements Objective {
     public double evaluate(List<Execution> executions) {
         FExpression o1Expr;
         FExpression o2Expr;
-        double similarity = 0.0;
+        double dissimilarity = 0.0;
         int count = 0;
         for (int i = 0; i < executions.size() - 1; i++) {
             o1Expr = getProductConstraint(this.fts, executions.get(i));
             for (int j = i + 1; j < executions.size(); j++) {
                 o2Expr = getProductConstraint(this.fts, executions.get(j));
-                similarity = similarity + similarity(this.fm, o1Expr, o2Expr);
+                dissimilarity = dissimilarity + (1 - similarity(this.fm, o1Expr, o2Expr));
                 count++;
             }
         }
-        return count > 0 ? similarity / count : 0.0;
+        return count > 0 ? dissimilarity / count : 0.0;
     }
 
     static FExpression getProductConstraint(FeaturedTransitionSystem fts, Execution execution) {
