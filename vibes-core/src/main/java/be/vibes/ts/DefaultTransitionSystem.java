@@ -24,16 +24,16 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Table;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * This class provides a default implementation for transition systems.
  *
  * @author Xavier Devroey - xavier.devroey@gmail.com
+ * @see TransitionSystem
+ * @see TransitionSystemFactory
  */
 public class DefaultTransitionSystem implements TransitionSystem {
 
@@ -132,7 +132,7 @@ public class DefaultTransitionSystem implements TransitionSystem {
     public AtomicProposition getAtomicProposition(String name) {
         return propositions.get(name);
     }
-    
+
     @Override
     public AtomicProposition getLabel(State state) {
         return labels.get(state);
@@ -170,10 +170,10 @@ public class DefaultTransitionSystem implements TransitionSystem {
         Preconditions.checkArgument(actions.values().contains(action), "Action does not belong to this transition system!");
         Iterator<Transition> it = getTransitions(source, action, target);
         Transition transition;
-        if(it.hasNext()){
+        if (it.hasNext()) {
             transition = it.next();
         } else {
-            if(!transitions.contains(source, target)){
+            if (!transitions.contains(source, target)) {
                 transitions.put(source, target, new HashSet<>());
             }
             transition = new Transition(source, action, target);
@@ -182,17 +182,17 @@ public class DefaultTransitionSystem implements TransitionSystem {
         }
         return transition;
     }
-    
-    AtomicProposition addProposition(String name){
+
+    AtomicProposition addProposition(String name) {
         AtomicProposition prop = propositions.get(name);
-        if(prop == null){
+        if (prop == null) {
             prop = new AtomicProposition(name);
             this.propositions.put(name, prop);
         }
         return prop;
     }
-    
-    void setLabel(State state, AtomicProposition prop){
+
+    void setLabel(State state, AtomicProposition prop) {
         Preconditions.checkNotNull(state, "State may not be null!");
         Preconditions.checkNotNull(prop, "Prop may not be null!");
         Preconditions.checkArgument(states.values().contains(state), "State does not belong to this transition system!");
